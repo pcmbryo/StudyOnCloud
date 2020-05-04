@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Noto Sans Jp', sans-serif;
+  color: #222;
+}
+
+.logo {
+  height: 50px;
+}
+
+.btn-primary {
+  background-color: #1ca18e;
+  border: 1px #168877 solid;
+}
+.btn-primary:hover {
+  background-color: #168877;
+  border: 1px #168877 solid;
+}
+.btn-primary:active {
+  background-color: #168877;
+  border: 1px #168877 solid;
+}
+.btn-secondary {
+  background-color: #a5c77a;
+  border: 1px #97b66f solid;
+}
+.btn-secondary:hover {
+  background-color: #97b66f;
+  border: 1px #97b66f solid;
+}
+.btn-success {
+  background-color: #e1cf6e;
+  border: 1px #ccbc62 solid;
+}
+.btn-success:hover {
+  background-color: #ccbc62;
+  border: 1px #ccbc62 solid;
+}
+.btn-danger {
+  background-color: #e39335;
+  border: 1px #d38731 solid;
+}
+.btn-danger:hover {
+  background-color: #d38731;
+  border: 1px #d38731 solid;
+}
+
+.header, .footer {
+  background-color: #eee;
+}
+
+.date-day-month {
+  width: 70px;
+}
+.date-day {
+  height: 53px;
+  background-color: #fff;
+  border: 1px #555 solid;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: none;
+  text-align: center;
+  position: relative;
+}
+.date {
+  font-size: 25px;
+  padding-top: 4px;
+}
+.day {
+  font-size: 10px;
+  bottom: 0px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: auto;
+}
+.month {
+  height: 24px;
+  line-height: 24px;
+  color: white;
+  background-color: #F13E35;
+  border: 1px #555 solid;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top: none;
+  text-align: center;
+  font-size: 15px;
+}
+
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768px) {
+
+}
+@media (max-width: 576px) {
+
+}
