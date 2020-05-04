@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_151656) do
+ActiveRecord::Schema.define(version: 2020_05_04_130053) do
+
+  create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "text"
+    t.bigint "room_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id", "created_at"], name: "index_chats_on_room_id_and_created_at"
+    t.index ["room_id"], name: "index_chats_on_room_id"
+  end
+
+  create_table "genre1s", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "genre1_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "genre2s", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "genre2_name"
+    t.bigint "genre1_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre1_id"], name: "index_genre2s_on_genre1_id"
+  end
 
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "follower_id"
@@ -22,6 +45,35 @@ ActiveRecord::Schema.define(version: 2020_05_03_151656) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "reservations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "participation_flg"
+    t.bigint "room_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_reservations_on_room_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "room_name"
+    t.text "room_detail"
+    t.datetime "room_start_datetime"
+    t.datetime "room_end_datetime"
+    t.integer "room_capacity"
+    t.integer "room_end_flg"
+    t.integer "room_delete_flg"
+    t.bigint "user_id"
+    t.bigint "genre1_id"
+    t.bigint "genre2_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre1_id"], name: "index_rooms_on_genre1_id"
+    t.index ["genre2_id"], name: "index_rooms_on_genre2_id"
+    t.index ["user_id", "created_at"], name: "index_rooms_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "user_name"
     t.string "email"
@@ -31,4 +83,11 @@ ActiveRecord::Schema.define(version: 2020_05_03_151656) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "chats", "rooms"
+  add_foreign_key "genre2s", "genre1s"
+  add_foreign_key "reservations", "rooms"
+  add_foreign_key "reservations", "users"
+  add_foreign_key "rooms", "genre1s"
+  add_foreign_key "rooms", "genre2s"
+  add_foreign_key "rooms", "users"
 end
