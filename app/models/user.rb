@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase }
+  has_many :rooms
+  has_many :reservations
+  has_many :chats
 
   has_many :active_relationships,
             class_name:  "Relationship",   
