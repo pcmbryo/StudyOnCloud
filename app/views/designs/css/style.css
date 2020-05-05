@@ -90,6 +90,10 @@ html, body {
   font-size: 15px;
 }
 
+.login-or-create {
+  max-width: 400px;
+}
+
 @media (max-width: 992px) {
 
 }
