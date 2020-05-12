@@ -94,6 +94,10 @@ html, body {
   max-width: 400px;
 }
 
+.users-container {
+  max-width: 600px;
+}
+
 @media (max-width: 992px) {
 
 }
