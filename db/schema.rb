@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_070317) do
+ActiveRecord::Schema.define(version: 2020_05_12_043518) do
 
   create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "text", null: false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_070317) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest", null: false
     t.string "image"
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

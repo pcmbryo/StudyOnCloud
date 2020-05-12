@@ -57,3 +57,6 @@ gem 'dotenv-rails'
 
 #パスワードをハッシュ化させるためのgem
 gem 'bcrypt',         '3.1.12' 
+
+#会員登録のエラーメッセージを日本語にするgem
+gem 'rails-i18n'

@@ -1,2 +1,6 @@
 <%= @user.user_name %><br>
 <%= @user.email %><br>
+<%= link_to 'ログアウト', logout_path, method: :delete %><br>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
