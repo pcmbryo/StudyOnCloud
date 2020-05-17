@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  participation_flg: 1
+  room: one
+  user: one
+
+two:
+  participation_flg: 1
+  room: two
+  user: two

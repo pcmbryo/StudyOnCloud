@@ -54,3 +54,16 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'dotenv-rails'
+
+#パスワードをハッシュ化させるためのgem
+gem 'bcrypt',         '3.1.12' 
+
+#会員登録のエラーメッセージを日本語にするgem
+gem 'rails-i18n'
+
+#ユーザーアイコン画像を設定するためのgem
+gem 'carrierwave'
+#アイコン画像のサイズ調整用gem
+#rmagicのインストールでつまずいた場合、[$ brew install ImageMagick]コマンドで
+#インストールした後に再度[$ bundle install]でrmagicをインストールできた（MacOSの場合）
+gem 'rmagick'
