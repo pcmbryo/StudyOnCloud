@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  #POST users/:id
   def create
     @user = User.new(user_params)
     if @user.save
@@ -20,9 +21,27 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-  
+
+  #GET /users/:id/editのとき編集
+  def edit
+    @user = User.find(params[:id])
+    #ユーザーアイコン画像のネーミングのための変数を宣言
+    $user_image_id = 'image_' + session[:user_id].to_s
+  end
+
+  #PATCH users/:id
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      $user_image_id = nil
+      redirect_to user_url(@user)
+    else
+      render 'edit'
+    end
+  end
+
   private
     def user_params
-      params.require(:user).permit(:user_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :image, :introduction)
     end
 end

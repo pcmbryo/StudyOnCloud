@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  #アイコン画像アップロードのために追加
+  mount_uploader :image, ImageUploader
+
   before_save { self.email = email.downcase }
   has_many :rooms
   has_many :reservations
