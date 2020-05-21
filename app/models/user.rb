@@ -13,7 +13,7 @@ class User < ApplicationRecord
              dependent:   :destroy
   has_many :following, 
     through: :active_relationships,
-     source: :followed
+    source: :followed
 
   has_many :passive_relationships,
             class_name: "Relationship",
@@ -21,7 +21,7 @@ class User < ApplicationRecord
             dependent:  :destroy
   has_many :followers,
     through: :positive_relationships,
-     source:  :follower
+    source:  :follower
   
   validates :user_name, presence: true, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

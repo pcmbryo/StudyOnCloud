@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @page_title = "新規登録"
   end
 
   #POST users/:id
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
       #redirect_to user_url(@user)はredirect_to userと省略可能
       redirect_to user_url(@user)
     else
-      render 'new'
+      redirect_to '/users/new'
     end
   end
 
