@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include SessionsHelper
+  include ApplicationHelper
   # ログインしていないと実行できないアクション
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user, only: [:edit, :update]
