@@ -16,6 +16,9 @@
 
       <%= f.submit "ログイン", class: "btn btn-primary btn-lg mx-auto my-4 w-100 text-white" %>
     <% end %>
-    <form action="" method="post">
+    <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+    <%= link_to "ゲストでログイン", guest_path, method: :post, class: "btn btn-primary btn-lg mx-auto my-4 w-100 text-white" %>
   </div>
 </div>
