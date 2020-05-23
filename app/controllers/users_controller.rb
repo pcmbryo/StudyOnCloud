@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @page_title = "ユーザー詳細"
   end
 
   def new
@@ -23,12 +24,22 @@ class UsersController < ApplicationController
       #redirect_to user_url(@user)はredirect_to userと省略可能
       redirect_to user_url(@user)
     else
-      redirect_to '/users/new'
+      if @user.errors.any?
+        errormessages = ""
+        @user.errors.full_messages.each do |msg| 
+          errormessages += msg.to_s
+          errormessages += "<br>"
+          #出力の際に(.html_safe)をつけると<br>が機能する。=> shared/_flash.html.erbに追加済み
+        end
+        flash[:danger] = errormessages
+      end
+      redirect_to new_user_path
     end
   end
 
   #GET /users/:id/editのとき編集
   def edit
+    @page_title = "編集"
     @user = User.find(params[:id])
     #ユーザーアイコン画像のネーミングのための変数を宣言
     $user_image_id = 'image_' + session[:user_id].to_s

@@ -1,12 +1,8 @@
-<% @page_title = "編集" %>
 <title><%= page_title %></title>
 <%= @user.user_name %><br>
 <%= @user.email %><br>
 <%= @user.introduction %><br>
 <%= image_tag @user.image.to_s %><br>
 <%= link_to 'ログアウト', logout_path, method: :delete %><br>
-<% flash.each do |message_type, message| %>
-    <div class="alert alert-<%= message_type %>"><%= message %></div>
-<% end %>
 <%= session[:user_id] %><br>
 <%= session[:user_name] %>

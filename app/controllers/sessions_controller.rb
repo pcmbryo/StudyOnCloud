@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   include SessionsHelper
 
   def new
+    @page_title = "ログイン"
   end
 
   def create
