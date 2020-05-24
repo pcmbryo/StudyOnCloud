@@ -21,7 +21,6 @@ class ImageUploader < CarrierWave::Uploader::Base
  
   # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
    def filename
-     #super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
      $user_image_id + '.jpg' if original_filename.present?
    end
 

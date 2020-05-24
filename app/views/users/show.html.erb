@@ -44,5 +44,4 @@
 <%= @user.introduction %><br>
 <%= image_tag @user.image.to_s %><br>
 <%= link_to 'ログアウト', logout_path, method: :delete %><br>
-<%= session[:user_id] %><br>
-<%= session[:user_name] %>
+<%= session[:user_id] %>

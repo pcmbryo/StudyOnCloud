@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
   include ApplicationHelper
 
   def new
+    if logged_in?
+      redirect_to current_user
+    end
     @page_title = "ログイン"
   end
 

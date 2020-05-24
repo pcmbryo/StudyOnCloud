@@ -8,12 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto">
       <a class="nav-item nav-link mr-3" href="#">スタクラとは？</a>
-      <% if session[:user_id].nil? %>
+      <% if logged_in? %>
+        <a href="/users/<%= current_user.id %>" class="nav-item nav-link mr-3">マイページ</a>
+        <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-item nav-link" %>
+      <% else %>
         <%= link_to '新規登録', new_user_path, class: "nav-item nav-link mr-3" %>
         <%= link_to 'ログイン', login_path, class: "nav-item nav-link" %>
-      <% else %>
-        <%= link_to 'マイページ', user_path, class: "nav-item nav-link mr-3" %>
-        <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-item nav-link" %>
       <% end %>
     </div>
   </div>
