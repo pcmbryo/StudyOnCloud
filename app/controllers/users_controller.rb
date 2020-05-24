@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   include ApplicationHelper
   # ログインしていないと実行できないアクション
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:update]
+  before_action :correct_user, only: [:update]
 
   def show
     @user = User.find(params[:id])
     @page_title = "ユーザー詳細"
+    $user_image_id = 'image_' + session[:user_id].to_s
   end
 
   def new
@@ -35,14 +36,6 @@ class UsersController < ApplicationController
       end
       redirect_to new_user_path
     end
-  end
-
-  #GET /users/:id/editのとき編集
-  def edit
-    @page_title = "編集"
-    @user = User.find(params[:id])
-    #ユーザーアイコン画像のネーミングのための変数を宣言
-    $user_image_id = 'image_' + session[:user_id].to_s
   end
 
   #PATCH users/:id
@@ -74,7 +67,7 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       unless @user == current_user
-        flash[:danger] = "他ユーザーを編集することはできません"
+        flash[:danger] = "他のユーザーを編集することはできません"
         redirect_to user_url(@user)
       end
     end

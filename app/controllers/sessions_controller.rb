@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  # ゲストでログイン
   def guest
     user = User.find_by(email: "guest@sysdog.com")
     if !user.nil?

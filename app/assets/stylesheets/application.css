@@ -23,49 +23,124 @@ html, body {
   color: #222;
 }
 
+.header, .footer {
+  background-color: #eee;
+}
+
 .logo {
   height: 50px;
 }
 
-.btn-primary {
+/* 通常のボタン色 */
+.btn-soc1,
+.btn-soc1.disabled, .btn-soc1:disabled {
+  color: #fff;
   background-color: #1ca18e;
-  border: 1px #168877 solid;
-}
-.btn-primary:hover {
-  background-color: #168877;
-  border: 1px #168877 solid;
-}
-.btn-primary:active {
-  background-color: #168877;
-  border: 1px #168877 solid;
-}
-.btn-secondary {
-  background-color: #a5c77a;
-  border: 1px #97b66f solid;
-}
-.btn-secondary:hover {
-  background-color: #97b66f;
-  border: 1px #97b66f solid;
-}
-.btn-success {
-  background-color: #e1cf6e;
-  border: 1px #ccbc62 solid;
-}
-.btn-success:hover {
-  background-color: #ccbc62;
-  border: 1px #ccbc62 solid;
-}
-.btn-danger {
-  background-color: #e39335;
-  border: 1px #d38731 solid;
-}
-.btn-danger:hover {
-  background-color: #d38731;
-  border: 1px #d38731 solid;
+  border-color: #1ca18e;
 }
 
-.header, .footer {
-  background-color: #eee;
+/* focusされた時の枠線の色 */
+.btn-soc1:focus, .btn-soc1.focus,
+.btn-soc1:not(:disabled):not(.disabled):active:focus, .btn-soc1:not(:disabled):not(.disabled).active:focus,
+.show > .btn-soc1.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(28, 161, 142, 0.5);
+}
+
+/* hover時（マウスカーソルを重ねた時）の色（通常より濃いor暗めの色を指定）*/
+.btn-soc1:hover {
+  color: #fff;
+  background-color: #178d7b;
+  border-color: #178d7b;
+}
+
+/* active時の色（hover時と同等かさらに濃いor暗めの色を指定） */
+.btn-soc1:not(:disabled):not(.disabled):active, .btn-soc1:not(:disabled):not(.disabled).active,
+.show > .btn-soc1.dropdown-toggle {
+  color: #fff;
+  background-color: #137969;
+  border-color: #137969;
+}
+
+.btn-outline-soc1 {
+  color: #1ca18e;
+  background-color: transparent;
+  background-image: none;
+  border-color: #1ca18e;
+}
+
+.btn-outline-soc1:hover,
+.btn-outline-soc1:not(:disabled):not(.disabled):active, .btn-outline-soc1:not(:disabled):not(.disabled).active,
+.show > .btn-outline-soc1.dropdown-toggle {
+  color: #fff;
+  background-color: #1ca18e;
+  border-color: #1ca18e;
+}
+
+.btn-outline-soc1:focus, .btn-outline-soc1.focus,
+.btn-outline-soc1:not(:disabled):not(.disabled):active:focus, .btn-outline-soc1:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-soc1.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(28, 161, 142, 0.5);
+}
+
+.btn-outline-soc1.disabled, .btn-outline-soc1:disabled {
+  color: #1ca18e;
+  background-color: transparent;
+}
+
+/* 通常のボタン色 */
+.btn-soc2,
+.btn-soc2.disabled, .btn-soc2:disabled {
+  color: #fff;
+  background-color: #e39335;
+  border-color: #e39335;
+}
+
+/* focusされた時の枠線の色 */
+.btn-soc2:focus, .btn-soc2.focus,
+.btn-soc2:not(:disabled):not(.disabled):active:focus, .btn-soc2:not(:disabled):not(.disabled).active:focus,
+.show > .btn-soc2.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(227, 147, 53, 0.5);
+}
+
+/* hover時（マウスカーソルを重ねた時）の色（通常より濃いor暗めの色を指定）*/
+.btn-soc2:hover {
+  color: #fff;
+  background-color: #d18631;
+  border-color: #d18631;
+}
+
+/* active時の色（hover時と同等かさらに濃いor暗めの色を指定） */
+.btn-soc2:not(:disabled):not(.disabled):active, .btn-soc2:not(:disabled):not(.disabled).active,
+.show > .btn-soc2.dropdown-toggle {
+  color: #fff;
+  background-color: #be7a2b;
+  border-color: #be7a2b;
+}
+
+.btn-outline-soc2 {
+  color: #e39335;
+  background-color: transparent;
+  background-image: none;
+  border-color: #e39335;
+}
+
+.btn-outline-soc2:hover,
+.btn-outline-soc2:not(:disabled):not(.disabled):active, .btn-outline-soc2:not(:disabled):not(.disabled).active,
+.show > .btn-outline-soc2.dropdown-toggle {
+  color: #fff;
+  background-color: #e39335;
+  border-color: #e39335;
+}
+
+.btn-outline-soc2:focus, .btn-outline-soc2.focus,
+.btn-outline-soc2:not(:disabled):not(.disabled):active:focus, .btn-outline-soc2:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-soc2.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(227, 147, 53, 0.5);
+}
+
+.btn-outline-soc2.disabled, .btn-outline-soc2:disabled {
+  color: #e39335;
+  background-color: transparent;
 }
 
 .date-day-month {
@@ -110,9 +185,10 @@ html, body {
   max-width: 400px;
 }
 
-.users-container {
+/* フォロー画面 */
+/* .users-container {
   max-width: 600px;
-}
+} */
 
 @media (max-width: 992px) {
 
