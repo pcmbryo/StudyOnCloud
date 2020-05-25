@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_043518) do
+ActiveRecord::Schema.define(version: 2020_05_25_052131) do
 
   create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "text", null: false
@@ -66,13 +66,9 @@ ActiveRecord::Schema.define(version: 2020_05_12_043518) do
     t.integer "room_end_flg", null: false
     t.integer "room_delete_flg", null: false
     t.bigint "user_id", null: false
-    t.bigint "genre1_id", null: false
-    t.bigint "genre2_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "room_start_flg", null: false
-    t.index ["genre1_id"], name: "index_rooms_on_genre1_id"
-    t.index ["genre2_id"], name: "index_rooms_on_genre2_id"
     t.index ["user_id", "created_at"], name: "index_rooms_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
@@ -93,7 +89,5 @@ ActiveRecord::Schema.define(version: 2020_05_12_043518) do
   add_foreign_key "genre2s", "genre1s"
   add_foreign_key "reservations", "rooms"
   add_foreign_key "reservations", "users"
-  add_foreign_key "rooms", "genre1s"
-  add_foreign_key "rooms", "genre2s"
   add_foreign_key "rooms", "users"
 end
