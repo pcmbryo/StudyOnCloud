@@ -6,8 +6,8 @@ class CreateRooms < ActiveRecord::Migration[6.0]
       t.datetime :room_start_datetime
       t.datetime :room_end_datetime
       t.integer :room_capacity
-      t.integer :room_end_flg
-      t.integer :room_delete_flg
+      t.integer :room_end_flg, default: 0
+      t.integer :room_delete_flg, default: 0
       t.references :user, null: true, foreign_key: true
       t.references :genre1, null: true, foreign_key: true
       t.references :genre2, null: true, foreign_key: true

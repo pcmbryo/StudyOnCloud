@@ -63,12 +63,12 @@ ActiveRecord::Schema.define(version: 2020_05_25_052131) do
     t.datetime "room_start_datetime", null: false
     t.datetime "room_end_datetime", null: false
     t.integer "room_capacity", null: false
-    t.integer "room_end_flg", null: false
-    t.integer "room_delete_flg", null: false
+    t.integer "room_end_flg", default: 0, null: false
+    t.integer "room_delete_flg", default: 0, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "room_start_flg", null: false
+    t.integer "room_start_flg", default: 0, null: false
     t.index ["user_id", "created_at"], name: "index_rooms_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
