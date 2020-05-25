@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   resources :users, :except => :edit
   post '/guest', to: 'sessions#guest'
+  root to: 'rooms#index'
+  resources :rooms
 end

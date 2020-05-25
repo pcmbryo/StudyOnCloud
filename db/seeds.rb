@@ -8,4 +8,12 @@
 
 User.create!(user_name: "ゲストさん", 
   email: "guest@sysdog.com",
-  password: "11111111")
+  password: "11111111", 
+  introduction: "ゲストです。よろしくお願いします！")
+
+Room.create!(room_name: "Railsもくもく会",
+  room_detail: "みんなでもくもくRailsを学びましょう",
+  room_start_datetime: Time.zone.now,
+  room_end_datetime: Time.zone.now + 1000,
+  room_capacity: 10,
+  user_id: 1)
