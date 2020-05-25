@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="container">
+
+      <%= form_for(@room) do |f| %>
+        
+        <div class="form-group">
+          <%= f.label :room_name, "タイトル" %>
+          <%= f.text_field :room_name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room_detail, "内容" %>
+          <%= f.text_area :room_detail, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room_start_datetime, "開始日時" %>
+          <%= f.date_field :room_start_datetime, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room_end_datetime, "終了日時" %>
+          <%= f.date_field :room_end_datetime, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room_capacity, "定員" %>
+          <%= f.text_field :room_capacity, class: "form-control" %>
+        </div>
+        
+        <%= f.submit "会員登録", class: "btn btn-soc1 btn-lg btn-block mt-5 mb-4" %>
+
+      <% end %>
+
+</div>

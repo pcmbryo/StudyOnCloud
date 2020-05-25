@@ -1,11 +1,11 @@
 class CreateChats < ActiveRecord::Migration[6.0]
   def change
     create_table :chats do |t|
-      t.text :text
-      t.references :room, null: true, foreign_key: true
+      t.text :text, null: false
+      t.references :room, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
-    add_index :chats, [:room_id, :created_at]
   end
 end
