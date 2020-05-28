@@ -8,6 +8,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @page_title = "ユーザー詳細"
     $user_image_id = 'image_' + session[:user_id].to_s
+    
+    #自分の開催勉強会
+    @myrooms = Room.where(user_id: @user.id)
   end
 
   def new

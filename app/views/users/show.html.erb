@@ -40,8 +40,8 @@
 </div>
 <br>
 <%= @user.user_name %><br>
-<%= @user.email %><br>
 <%= @user.introduction %><br>
 <%= image_tag @user.image.to_s %><br>
-<%= link_to 'ログアウト', logout_path, method: :delete %><br>
-<%= session[:user_id] %>
+<% if @myrooms != nil %>
+<%= render 'rooms/room' %>
+<% end %>

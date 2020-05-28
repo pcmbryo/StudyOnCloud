@@ -17,3 +17,17 @@ Room.create!(room_name: "Railsもくもく会",
   room_end_datetime: Time.zone.now + 1000,
   room_capacity: 10,
   user_id: 1)
+
+Room.create!(room_name: "AIもくもく会",
+  room_detail: "みんなでもくもくAIを学びましょう",
+  room_start_datetime: Time.zone.now,
+  room_end_datetime: Time.zone.now + 1000,
+  room_capacity: 5,
+  user_id: 1)
+
+Room.create!(room_name: "pythonもくもく会",
+  room_detail: "みんなでもくもくpythonを学びましょう",
+  room_start_datetime: Time.zone.now,
+  room_end_datetime: Time.zone.now + 1000,
+  room_capacity: 5,
+  user_id: 1)

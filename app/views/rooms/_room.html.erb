@@ -1,0 +1,11 @@
+<% @myrooms.each do |myroom| %>
+  <h2><%= link_to myroom.room_name, "#" %><br></h2>
+  <%= myroom.room_detail %><br>
+  <%= myroom.room_start_datetime.strftime("%-m月").to_s %><br>
+  <%= myroom.room_start_datetime.strftime("%-d").to_s %><br>
+  <%= myroom.room_start_datetime.strftime("%a") %><br>
+  <%= myroom.room_start_datetime.strftime("%-H:%M 〜").to_s %>
+  <%= myroom.room_end_datetime.strftime("%-H:%M").to_s %><br>
+  開催者：<%= link_to @user.user_name, "#" %><br>
+  <%= myroom.room_capacity %>名<br>
+<% end %>
