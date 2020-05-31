@@ -1,18 +1,5 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<div class="class">
-  <div class="row">
-    <div class="col-md-3 col-12 order-md-2">
-      <div class="container-fruid mt-5">
-      <div class="col-4 col-md-12 mt-4 d-flex align-items-end">
-        <a class="btn btn-soc1 btn-lg btn-block text-white">
-          <i class="fas fa-pencil-alt mr-3"></i>つくる
-        </a>
-      </div>
-      </div>
-    </div>
-    <div class="col-md-9 col-12 order-md-1">
-      <div class="container-fruid mt-5">
-      </div>
-    </div>
-  </div>
+<%= link_to new_room_path, class: "btn btn-soc1 btn-lg" do %>
+  <i class="fas fa-pencil-alt mr-2"></i> つくる
+<% end %>
 </div>

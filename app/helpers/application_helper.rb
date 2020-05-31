@@ -2,7 +2,7 @@ module ApplicationHelper
   # コントローラから受け取ったページタイトルに"スタクラ"を付与してviewへ渡す
   def page_title
     title = "スタクラ"
-    title = @page_title + " | " + title if @page_title
+    title = @page_title + " / " + title if @page_title
     title
   end
 
@@ -11,6 +11,7 @@ module ApplicationHelper
     session[:user_id] = user.id
   end
 
+  # 現在ログイン中のユーザーを取得
   def current_user
     if @current_user.nil?
       @current_user = User.find_by(id: session[:user_id])
@@ -24,6 +25,7 @@ module ApplicationHelper
     !current_user.nil?
   end
 
+  # ログアウトする
   def log_out
     session.delete(:user_id)
     @current_user = nil
@@ -34,10 +36,32 @@ module ApplicationHelper
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
+
   #アクセスしようとしたURLを覚えておく
   def store_location
     if request.get?
       session[:forwarding_url] = request.original_url
+    end
+  end
+
+  #ログインしているかを確認
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "ログインしてください"
+      redirect_to login_url
+    end
+  end
+
+  # オブジェクトがもつエラーメッセージをフラッシュに格納する
+  def error_to_flush object
+    if object.errors.any?
+      error_messages = ""
+      object.errors.full_messages.each do |msg| 
+        error_messages += msg.to_s + "<br>"
+        #出力の際に(.html_safe)をつけると<br>が機能する。=> shared/_flash.html.erbに追加済み
+      end
+      flash[:danger] = error_messages
     end
   end
 end

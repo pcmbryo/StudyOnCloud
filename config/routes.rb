@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
+  get '/login',   to: 'sessions#new'
+  post '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  resources :users, :except => :edit
+  resources :users
   post '/guest', to: 'sessions#guest'
   root to: 'rooms#index'
   resources :rooms
+  post '/rooms/confirm', to: 'rooms#confirm'
 end

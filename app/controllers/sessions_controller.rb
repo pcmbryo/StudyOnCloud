@@ -25,13 +25,13 @@ class SessionsController < ApplicationController
   # ゲストでログイン
   def guest
     user = User.find_by(email: "guest@sysdog.com")
-    if !user.nil?
+    if user.nil?
+      flash[:danger] = "ゲストでログインできませんでした"
+      redirect_to login_path
+    else
       log_in user
       flash[:success] = "ゲストでログインしました"
       redirect_to user
-    else
-      flash[:danger] = "ゲストでログインできませんでした"
-      redirect_to login_path
     end
   end
 
