@@ -1,11 +1,67 @@
-<% @myrooms.each do |myroom| %>
-  <h2><%= link_to myroom.room_name, "#" %><br></h2>
-  <%= myroom.room_detail %><br>
-  <%= myroom.room_start_datetime.strftime("%-m月").to_s %><br>
-  <%= myroom.room_start_datetime.strftime("%-d").to_s %><br>
-  <%= myroom.room_start_datetime.strftime("%a") %><br>
-  <%= myroom.room_start_datetime.strftime("%-H:%M 〜").to_s %>
-  <%= myroom.room_end_datetime.strftime("%-H:%M").to_s %><br>
-  開催者：<%= link_to @user.user_name, "#" %><br>
-  <%= myroom.room_capacity %>名<br>
+【開催予定】<br>
+<% if @host_rooms_future.empty? %>
+  開催予定はありません<br>
+<%else%>
+  <% @host_rooms_future.each do |room| %>
+    <h2><%= link_to room.room_name, "#" %><br></h2>
+    <%= room.room_detail %><br>
+    <%= room.room_start_datetime.strftime("%-m月").to_s %><br>
+    <%= room.room_start_datetime.strftime("%-d").to_s %><br>
+    <%= room.room_start_datetime.strftime("%a") %><br>
+    <%= room.room_start_datetime.strftime("%-H:%M 〜").to_s %>
+    <%= room.room_end_datetime.strftime("%-H:%M").to_s %><br>
+    開催者：<%= link_to room.user_id, '/users/params[room.user_id]' %><br>
+    <%= room.room_capacity %>名<br>
+  <% end %>
+<% end %>
+
+【参加予定】<br>
+<% if @join_rooms_future.empty? %>
+  参加予定はありません<br>
+<%else%>
+  <% @join_rooms_future.each do |room| %>
+    <h2><%= link_to room.room_name, '/users/params[room.user_id]' %><br></h2>
+    <%= room.room_detail %><br>
+    <%= room.room_start_datetime.strftime("%-m月").to_s %><br>
+    <%= room.room_start_datetime.strftime("%-d").to_s %><br>
+    <%= room.room_start_datetime.strftime("%a") %><br>
+    <%= room.room_start_datetime.strftime("%-H:%M 〜").to_s %>
+    <%= room.room_end_datetime.strftime("%-H:%M").to_s %><br>
+    開催者：<%= link_to room.user_id, "#" %><br>
+    <%= room.room_capacity %>名<br>
+  <% end %>
+<% end %>
+
+【開催履歴】<br>
+<% if @host_rooms_past.empty? %>
+  開催履歴はありません<br>
+<% else %>
+  <% @host_rooms_past.each do |room| %>
+    <h2><%= link_to room.room_name, "#" %><br></h2>
+    <%= room.room_detail %><br>
+    <%= room.room_start_datetime.strftime("%-m月").to_s %><br>
+    <%= room.room_start_datetime.strftime("%-d").to_s %><br>
+    <%= room.room_start_datetime.strftime("%a") %><br>
+    <%= room.room_start_datetime.strftime("%-H:%M 〜").to_s %>
+    <%= room.room_end_datetime.strftime("%-H:%M").to_s %><br>
+    開催者：<%= link_to room.user_id, user_path(@user) %><br>
+    <%= room.room_capacity %>名<br>
+  <% end %>
+<% end %>
+
+【参加履歴】<br>
+<% if @join_rooms_past.empty? %>
+  参加履歴はありません<br>
+<% else %>
+  <% @join_rooms_past.each do |room| %>
+    <h2><%= link_to room.room_name, "#" %><br></h2>
+    <%= room.room_detail %><br>
+    <%= room.room_start_datetime.strftime("%-m月").to_s %><br>
+    <%= room.room_start_datetime.strftime("%-d").to_s %><br>
+    <%= room.room_start_datetime.strftime("%a") %><br>
+    <%= room.room_start_datetime.strftime("%-H:%M 〜").to_s %>
+    <%= room.room_end_datetime.strftime("%-H:%M").to_s %><br>
+    開催者：<%= link_to room.user_id, user_path(@user) %><br>
+    <%= room.room_capacity %>名<br>
+  <% end %>
 <% end %>

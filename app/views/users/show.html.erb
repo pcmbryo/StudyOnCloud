@@ -42,6 +42,6 @@
 <%= @user.user_name %><br>
 <%= @user.introduction %><br>
 <%= image_tag @user.image.to_s %><br>
-<% if @myrooms != nil %>
+<% if @host_rooms != nil && @join_rooms != nil %>
 <%= render 'rooms/room' %>
 <% end %>
