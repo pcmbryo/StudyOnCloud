@@ -45,4 +45,8 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  def get_host_user user_id
+    host_user = User.find_by(id: user_id)
+  end
 end
