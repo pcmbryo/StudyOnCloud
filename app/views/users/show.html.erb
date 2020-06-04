@@ -3,11 +3,13 @@
 <!-- 編集ボタン・編集ポップアップのレイアウト -->
 <div class="container my-5">
   <div class="max-width-800 mx-auto">
-    <% if session[:user_id] == @user.id %>
-      <% if current_user.email != "guest@sysdog.com" %>
-        <button class="btn btn-primary">編集</button>
+    <div class="text-right">
+      <% if session[:user_id] == @user.id %>
+        <% if current_user.email != "guest@sysdog.com" %>
+          <button type="button" class="btn btn-outline-soc1" data-toggle="modal" data-target="#exampleModal">編集</button>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
