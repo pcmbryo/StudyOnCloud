@@ -1,13 +1,13 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <!-- 編集ボタン・編集ポップアップのレイアウト -->
-<div class="container">
-  <div class="mt-5 text-right">
-  <% if session[:user_id] == @user.id %>
-    <% if current_user.email != "guest@sysdog.com" %>
-      <button class="btn btn-primary">編集</button>
+<div class="container my-5">
+  <div class="max-width-800 mx-auto">
+    <% if session[:user_id] == @user.id %>
+      <% if current_user.email != "guest@sysdog.com" %>
+        <button class="btn btn-primary">編集</button>
+      <% end %>
     <% end %>
-  <% end %>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -17,6 +17,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <div>
             <%= form_with model: @user do |f| %>
               <div class="modal-body">
                 <div class="form-group">
@@ -41,66 +42,67 @@
         </div>
       </div>
     </div>
-<!-- ここまで編集レイアウト -->
+    <!-- ここまで編集レイアウト -->
 
-<!-- ユーザー情報 -->
-  <div class="mb-5">
-    <div class="row">
-      <div class="col-3 text-center">
-        <%= image_tag @user.image.to_s %>
-      </div>
-      <div class="col-9">
-        <div class="row">
-          <div class="h3"><%= @user.user_name %></div>
+    <!-- ユーザー情報 -->
+    <div class="mb-5">
+      <div class="row">
+        <div class="col-3 text-center">
+          <%= image_tag @user.image.to_s %>
         </div>
-        <div class="row">
-          <div class="mt-3">
-            <%= @user.introduction %><br>
+        <div class="col-9">
+          <div class="row">
+            <div class="h3"><%= @user.user_name %></div>
           </div>
-        </div>      
+          <div class="row">
+            <div class="mt-3">
+              <%= @user.introduction %><br>
+            </div>
+          </div>      
+        </div>
       </div>
     </div>
-  </div>
-  <hr>
-  <div class="mt-5">
-    <div class="h3">開催予定</div>
-    <% if @host_rooms_future.empty? %>
-      <div class="h5">現在開催予定の勉強会はありません</div>
-    <% else %>
-      <% @host_rooms_future.each do |room| %>
-        <%= render partial: 'rooms/room', locals: { room: room } %>
+    <hr>
+    <div class="mt-5">
+      <div class="h3">開催予定</div>
+      <% if @host_rooms_future.empty? %>
+        <div class="h5">現在開催予定の勉強会はありません</div>
+      <% else %>
+        <% @host_rooms_future.each do |room| %>
+          <%= render partial: 'rooms/room', locals: { room: room } %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <div class="mt-5">
-    <div class="h3">参加予定</div>
-    <% if @join_rooms_future.empty? %>
-      <div class="h5">現在参加予定の勉強会はありません</div>
-    <% else %>
-      <% @join_rooms_future.each do |room| %>
-        <%= render partial: 'rooms/room', locals: { room: room } %>
+    </div>
+    <div class="mt-5">
+      <div class="h3">参加予定</div>
+      <% if @join_rooms_future.empty? %>
+        <div class="h5">現在参加予定の勉強会はありません</div>
+      <% else %>
+        <% @join_rooms_future.each do |room| %>
+          <%= render partial: 'rooms/room', locals: { room: room } %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <div class="mt-5">
-    <div class="h3">開催履歴</div>
-    <% if @host_rooms_past.empty? %>
-      <div class="h5">開催履歴はありません</div>
-    <% else %>
-      <% @host_rooms_past.each do |room| %>
-        <%= render partial: 'rooms/room', locals: { room: room } %>
+    </div>
+    <div class="mt-5">
+      <div class="h3">開催履歴</div>
+      <% if @host_rooms_past.empty? %>
+        <div class="h5">開催履歴はありません</div>
+      <% else %>
+        <% @host_rooms_past.each do |room| %>
+          <%= render partial: 'rooms/room', locals: { room: room } %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <div class="mt-5">
-    <div class="h3">参加履歴</div>
-    <% if @join_rooms_past.empty? %>
-      <div class="h5">参加履歴はありません</div>
-    <% else %>
-      <% @join_rooms_past.each do |room| %>
-        <%= render partial: 'rooms/room', locals: { room: room } %>
+    </div>
+    <div class="mt-5">
+      <div class="h3">参加履歴</div>
+      <% if @join_rooms_past.empty? %>
+        <div class="h5">参加履歴はありません</div>
+      <% else %>
+        <% @join_rooms_past.each do |room| %>
+          <%= render partial: 'rooms/room', locals: { room: room } %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
 
