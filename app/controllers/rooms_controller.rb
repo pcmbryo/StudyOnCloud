@@ -4,24 +4,28 @@ class RoomsController < ApplicationController
   # ログインしていないと実行できないアクション
   before_action :logged_in_user, except: [:index, :show]
 
-  def index
-    
-  end
-
-  def show
-    @page_title = "勉強会詳細"
-    @room = Room.find(params[:id])
-  end
-
+  # 勉強会作成画面
   def new
     @page_title = "勉強会の作成"
     @room = Room.new
+  end
+
+  # 勉強会一覧画面
+  def index
+    @rooms = Room.find_future_room.where(room_delete_flg: 0)
+  end
+
+   # 勉強会詳細画面
+  def show
+    @page_title = "勉強会詳細"
+    @room = Room.find(params[:id])
   end
 
   def confirm
     
   end
 
+  # 勉強会作成
   def create
     @room = Room.new(room_params)
     if @room.save
@@ -33,16 +37,16 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
-  def update
-
-  end
-
+  # 勉強会削除
   def destroy
+    room = Room.find(params[:id])
+    room.room_delete_flg = 1
+    if room.save
+      flash[:success] = "勉強会を削除しました"
+      redirect_to root_path
+    else
 
+    end
   end
 
   private

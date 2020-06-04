@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+  # ルート
+  root to: 'rooms#index'
+
+  # ログイン
   get '/login',   to: 'sessions#new'
   post '/login',   to: 'sessions#create'
+  post '/login/guest', to: 'sessions#guest'
   delete '/logout',  to: 'sessions#destroy'
-  resources :users
-  post '/guest', to: 'sessions#guest'
-  root to: 'rooms#index'
-  resources :rooms
+
+  # ユーザー
+  resources :users, except: [:index, :edit, :delete]
+
+  # 勉強会
+  resources :rooms, except: [:index]
   post '/rooms/confirm', to: 'rooms#confirm'
 end

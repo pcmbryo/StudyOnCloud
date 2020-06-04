@@ -5,7 +5,17 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:update]
   before_action :correct_user, only: [:update]
 
-  # GET /uesrs/:id
+  # ユーザー作成画面
+  def new
+    @page_title = "新規登録"
+    # ログインしていた場合マイページに遷移
+    if logged_in?
+      redirect_to current_user
+    end
+    @user = User.new
+  end
+
+  # ユーザー詳細画面
   def show
     @page_title = "ユーザー詳細"
     @user = User.find(params[:id])
@@ -20,20 +30,9 @@ class UsersController < ApplicationController
     @join_rooms = Room.eager_load(:reservations).where(reservations: {user_id: @user.id})
     @join_rooms_future = @join_rooms.find_future_room
     @join_rooms_past = @join_rooms.find_past_room
-
   end
 
-  # GET /users/new
-  def new
-    @page_title = "新規登録"
-    # ログインしていた場合マイページに遷移
-    if logged_in?
-      redirect_to current_user
-    end
-    @user = User.new
-  end
-
-  # POST /users
+  # ユーザー作成
   def create
     @user = User.new(user_params)
     if @user.save
@@ -48,7 +47,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH /users/:id
+  # ユーザー更新
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)

@@ -181,14 +181,17 @@ html, body {
   font-size: 15px;
 }
 
-.login-or-create {
+.max-width-400 {
   max-width: 400px;
 }
 
-/* フォロー画面 */
-/* .users-container {
+.max-width-600 {
   max-width: 600px;
-} */
+}
+
+.max-width-800 {
+  max-width: 800px;
+}
 
 @media (max-width: 992px) {
 
@@ -197,5 +200,5 @@ html, body {
 
 }
 @media (max-width: 576px) {
-
+  
 }

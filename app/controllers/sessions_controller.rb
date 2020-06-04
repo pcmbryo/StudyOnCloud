@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   include ApplicationHelper
 
+  # ログイン画面
   def new
     if logged_in?
       redirect_to current_user
@@ -8,6 +9,7 @@ class SessionsController < ApplicationController
     @page_title = "ログイン"
   end
 
+  # ログイン
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if !user.nil? && user.authenticate(params[:session][:password])
@@ -15,7 +17,7 @@ class SessionsController < ApplicationController
       log_in user
       flash[:success] = user.user_name + "でログインしました"
       #redirect_to user
-      redirect_back_or user
+      redirect_back_or root_path
     else
       flash.now[:danger] = "メールアドレスとパスワードの組み合わせが正しくありません"
       render 'new'
@@ -31,10 +33,11 @@ class SessionsController < ApplicationController
     else
       log_in user
       flash[:success] = "ゲストでログインしました"
-      redirect_to user
+      redirect_to root_path
     end
   end
 
+  # ログアウト
   def destroy
     log_out
     redirect_to login_path

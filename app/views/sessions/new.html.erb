@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<div class="container">
-  <div class="card mx-auto my-5 p-4 login-or-create">
+<div class="container my-5">
+  <div class="card mx-auto p-4 max-width-400">
     <div class="text-center my-3 h1">ログイン</div>
     <%= form_for(:session, url: login_path) do |f| %>
 
@@ -11,12 +11,12 @@
 
       <div class="form-group">
         <%= f.label :password, "パスワード（8文字以上）" %>
-        <%= f.password_field :password, placeholder: "••••••••", class: "form-control" %>
+        <%= f.password_field :password, placeholder: "●●●●●●●●", class: "form-control" %>
       </div>
 
       <%= f.submit "ログイン", class: "btn btn-soc1 btn-lg btn-block mt-5 mb-3" %>
     <% end %>
     <hr>
-    <%= link_to "ゲストでログイン", guest_path, method: :post, class: "btn btn-outline-soc2 btn-lg btn-block my-3" %>
+    <%= link_to "ゲストでログイン", login_guest_path, method: :post, class: "btn btn-outline-soc2 btn-lg btn-block my-3" %>
   </div>
 </div>

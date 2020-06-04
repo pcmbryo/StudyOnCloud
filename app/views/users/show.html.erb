@@ -14,7 +14,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-        <%= form_for(@user) do |f| %>
+        <%= form_with model: @user do |f| %>
           <div class="modal-body">
             <div class="form-group">
               <%= f.label :user_name, "ニックネーム" %>
@@ -43,5 +43,5 @@
 <%= @user.introduction %><br>
 <%= image_tag @user.image.to_s %><br>
 <% if @host_rooms != nil && @join_rooms != nil %>
-<%= render 'rooms/room' %>
+<%= render 'rooms/rooms' %>
 <% end %>

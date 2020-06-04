@@ -20,7 +20,7 @@ module ApplicationHelper
     end
   end
 
-  #ユーザーがログインしていればtrue,それ以外はfalseを返す
+  # ユーザーがログインしていればtrue,それ以外はfalseを返す
   def logged_in?
     !current_user.nil?
   end
@@ -31,20 +31,20 @@ module ApplicationHelper
     @current_user = nil
   end
 
-  #記憶したURL（もしくはデフォルト値）にリダイレクト
+  # 記憶したURL（もしくはデフォルト値）にリダイレクト
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
 
-  #アクセスしようとしたURLを覚えておく
+  # アクセスしようとしたURLを覚えておく
   def store_location
     if request.get?
       session[:forwarding_url] = request.original_url
     end
   end
 
-  #ログインしているかを確認
+  # ログインしているかを確認
   def logged_in_user
     unless logged_in?
       store_location

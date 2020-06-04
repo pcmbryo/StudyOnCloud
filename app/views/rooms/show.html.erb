@@ -1,3 +1,44 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<%= @room.room_name %>
+<div class="container my-5">
+  <div class="d-flex justify-content-between">
+    <div class="h2">勉強会詳細</div>
+    <% if @room.user_id == session[:user_id] %>
+      <%= link_to room_path, method: :delete, class: "btn btn-outline-soc2 btn-lg", data: { confirm: '勉強会を削除してよろしいですか？' } do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <table class="table mt-4">
+    <thead class="thead-light">
+      <tr>
+        <th></th>
+        <th class="align-middle h3"><%= @room.room_name %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="align-middle" scope="row">詳細</th>
+        <td class="align-middle"><%= @room.room_detail %></td>
+      </tr>
+      <tr>
+        <th class="align-middle" scope="row">開催者</th>
+        <td class="align-middle"><%= @room.user.user_name %></td>
+      </tr>
+      <tr>
+        <th class="align-middle" scope="row">開催日</th>
+        <td class="align-middle"><%= @room.room_start_datetime.strftime("%-m月%-d日") %></td>
+      </tr>
+      <tr>
+        <th class="align-middle" scope="row">時間</th>
+        <td class="align-middle"><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %></td>
+      </tr>
+      <tr>
+        <th class="align-middle" scope="row">定員</th>
+        <td class="align-middle"><%= @room.room_capacity %>名</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

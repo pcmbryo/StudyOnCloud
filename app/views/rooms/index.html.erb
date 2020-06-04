@@ -1,5 +1,28 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= link_to new_room_path, class: "btn btn-soc1 btn-lg" do %>
-  <i class="fas fa-pencil-alt mr-2"></i> つくる
-<% end %>
+<div class="container my-5">
+  <div class="max-width-800 mx-auto">
+    <div class="row">
+      <div class="col-12 col-md-8">
+        <div class="h2">
+          現在予約できる勉強会
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mt-4 mt-md-0">
+          <%= link_to new_room_path, class: "btn btn-soc1 btn-lg btn-block" do %>
+            <i class="fas fa-pencil-alt mr-2"></i> 自分で作る
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <% if @rooms.empty? %>
+        <div class="h5">現在予約できる勉強会はありません</div>
+      <% else %>
+        <% @rooms.each do |room| %>
+          <%= render partial: 'rooms/room', locals: { room: room } %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
