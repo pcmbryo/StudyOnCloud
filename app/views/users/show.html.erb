@@ -34,40 +34,40 @@
     <hr>
     <div class="mt-5">
       <div class="h3">開催予定</div>
-      <% if @host_rooms_future.empty? %>
+      <% if @host_plans.empty? %>
         <div class="h5">現在開催予定の勉強会はありません</div>
       <% else %>
-        <% @host_rooms_future.each do |room| %>
+        <% @host_plans.each do |room| %>
           <%= render partial: 'rooms/room', locals: { room: room } %>
         <% end %>
       <% end %>
     </div>
     <div class="mt-5">
       <div class="h3">参加予定</div>
-      <% if @join_rooms_future.empty? %>
+      <% if @guest_plans.empty? %>
         <div class="h5">現在参加予定の勉強会はありません</div>
       <% else %>
-        <% @join_rooms_future.each do |room| %>
+        <% @guest_plans.each do |room| %>
           <%= render partial: 'rooms/room', locals: { room: room } %>
         <% end %>
       <% end %>
     </div>
     <div class="mt-5">
       <div class="h3">開催履歴</div>
-      <% if @host_rooms_past.empty? %>
+      <% if @host_histories.empty? %>
         <div class="h5">開催履歴はありません</div>
       <% else %>
-        <% @host_rooms_past.each do |room| %>
+        <% @host_histories.each do |room| %>
           <%= render partial: 'rooms/room', locals: { room: room } %>
         <% end %>
       <% end %>
     </div>
     <div class="mt-5">
       <div class="h3">参加履歴</div>
-      <% if @join_rooms_past.empty? %>
+      <% if @guest_histories.empty? %>
         <div class="h5">参加履歴はありません</div>
       <% else %>
-        <% @join_rooms_past.each do |room| %>
+        <% @guest_histories.each do |room| %>
           <%= render partial: 'rooms/room', locals: { room: room } %>
         <% end %>
       <% end %>
