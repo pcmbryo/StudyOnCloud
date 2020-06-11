@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
 
   # 勉強会一覧画面
   def index
-    @rooms = Room.find_future_room.where(room_delete_flg: 0)
+    @rooms = Room.home_index
   end
 
    # 勉強会詳細画面

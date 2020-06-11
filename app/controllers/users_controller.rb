@@ -20,16 +20,14 @@ class UsersController < ApplicationController
     @page_title = "ユーザー詳細"
     @user = User.find(params[:id])
     $user_image_id = 'image_' + session[:user_id].to_s
-    
-    #自分の開催勉強会
-    @host_rooms = Room.where(user_id: @user.id)
-    @host_rooms_future = @host_rooms.find_future_room
-    @host_rooms_past = @host_rooms.find_past_room
 
-    #自分の予約している勉強会
-    @join_rooms = Room.eager_load(:reservations).where(reservations: {user_id: @user.id})
-    @join_rooms_future = @join_rooms.find_future_room
-    @join_rooms_past = @join_rooms.find_past_room
+    # 自分の開催勉強会
+    @host_plans = Room.host_plans(@user.id)
+    @host_histories = Room.host_histories(@user.id)
+
+    # 自分の予約している勉強会
+    @guest_plans = Room.guest_plans(@user.id)
+    @guest_histories = Room.guest_histories(@user.id)
   end
 
   # ユーザー作成
