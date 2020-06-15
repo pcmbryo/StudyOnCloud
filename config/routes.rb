@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   # 勉強会
   resources :rooms, except: [:index]
   post '/rooms/confirm', to: 'rooms#confirm'
+  post '/rooms/reservate/:id', to: 'rooms#reservate'
 end

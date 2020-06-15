@@ -37,8 +37,8 @@ Room.create!(room_name: "AIもくもく会",
 
 Room.create!(room_name: "pythonもくもく会",
   room_detail: "みんなでもくもくpythonを学びましょう",
-  room_start_datetime: Time.zone.now.next_day,
-  room_end_datetime: Time.zone.now + 1000,
+  room_start_datetime: Time.zone.now.next_month,
+  room_end_datetime: Time.zone.now.next_month + 1000,
   room_capacity: 5,
   user_id: 3)
 
@@ -49,14 +49,21 @@ Room.create!(room_name: "予約テスト会",
   room_capacity: 5,
   user_id: 1)
 
-Reservation.create!(
-  room_id: 1,
-  user_id: 1
-)
+Room.create!(room_name: "テスト勉強会ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+  room_detail: "テストのための会ですああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+  room_start_datetime: Time.zone.now.next_month,
+  room_end_datetime: Time.zone.now.next_month + 1000,
+  room_capacity: 10,
+  user_id: 2)
 
 Reservation.create!(
   room_id: 1,
   user_id: 2
+)
+
+Reservation.create!(
+  room_id: 1,
+  user_id: 3
 )
 
 Reservation.create!(
@@ -66,12 +73,12 @@ Reservation.create!(
 
 Reservation.create!(
   room_id: 3,
-  user_id: 2
+  user_id: 1
 )
 
 Reservation.create!(
   room_id: 3,
-  user_id: 3
+  user_id: 2
 )
 
 Reservation.create!(

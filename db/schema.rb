@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_125207) do
     t.integer "participation_flg", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id", "user_id"], name: "index_reservations_on_room_id_and_user_id", unique: true
     t.index ["room_id"], name: "index_reservations_on_room_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

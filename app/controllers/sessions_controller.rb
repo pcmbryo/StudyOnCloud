@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
     else
       log_in user
       flash[:success] = "ゲストでログインしました"
-      redirect_to root_path
+      redirect_back_or root_path
     end
   end
 
