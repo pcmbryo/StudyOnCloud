@@ -9,13 +9,23 @@ class Room < ApplicationRecord
   validates :room_end_datetime, presence: true
   validates :room_capacity, presence: true
   validates :user_id, presence: true
-  
-  # 開催日が過去の勉強部屋を返すメソッド
+
+  # 指定したカラムの昇順を返す
+  def self.asc(column)
+    self.order(column)
+  end
+
+  # 指定したカラムの降順を返す
+  def self.desc(column)
+    self.order(column => "DESC")
+  end
+
+  # 開催日が過去の勉強部屋を返す
   def self.past_rooms
     self.where.not(room_start_datetime: Time.zone.now..Float::INFINITY)
   end
 
-  # 開催日が未来の勉強部屋を返すメソッド
+  # 開催日が未来の勉強部屋を返す
   def self.future_rooms
     self.where(room_start_datetime: Time.zone.now..Float::INFINITY)
   end
@@ -30,16 +40,17 @@ class Room < ApplicationRecord
     self.where(reservations: {user_id: user_id})
   end
 
-
   # 削除されていない勉強部屋を取得
   def self.not_delete_rooms
     self.where(room_delete_flg: 0)
   end
 
+  # 一覧表示に必要なテーブルを結合する
   def self.join_for_index
     self.joins(:user).includes(:reservations).references(:reservations)
   end
 
+  # 一覧表示に必要なカラムをセレクトする
   def self.select_for_index
     self.select("
       rooms.id,
@@ -55,24 +66,29 @@ class Room < ApplicationRecord
       ")
   end
 
+  # 開催予定
   def self.host_plans(user_id)
     self.join_for_index.select_for_index.host_rooms(user_id).future_rooms.not_delete_rooms
   end
 
+  # 開催履歴
   def self.host_histories(user_id)
-    self.join_for_index.select_for_index.host_rooms(user_id).past_rooms.not_delete_rooms
+    self.join_for_index.select_for_index.host_rooms(user_id).past_rooms.not_delete_rooms.asc(:room_start_datetime)
   end
 
+  # 参加予定
   def self.guest_plans(user_id)
-    self.join_for_index.select_for_index.guest_rooms(user_id).future_rooms
+    self.join_for_index.select_for_index.guest_rooms(user_id).future_rooms.asc(:room_start_datetime)
   end
 
+  # 参加履歴
   def self.guest_histories(user_id)
-    self.join_for_index.select_for_index.guest_rooms(user_id).past_rooms.not_delete_rooms
+    self.join_for_index.select_for_index.guest_rooms(user_id).past_rooms.not_delete_rooms.asc(:room_start_datetime)
   end
 
+  # 予約できる勉強会一覧
   def self.home_index
-    self.join_for_index.select_for_index.future_rooms.not_delete_rooms
+    self.join_for_index.select_for_index.future_rooms.not_delete_rooms.asc(:room_start_datetime)
   end
 
 
