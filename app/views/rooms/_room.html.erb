@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-9">
       <div class="card-title">
-        <%= link_to room.room_name, room_path(room) %>
+        <%= link_to room.room_name.truncate(32), room_path(room) %>
       </div>
       <div class="card-text">
-        <%= link_to room.room_detail, room_path(room), class: "small text-muted" %>
+        <%= link_to room.room_detail.truncate(59), room_path(room), class: "small text-muted" %>
       </div>
       <hr>
       <div class="d-flex justify-content-between">
