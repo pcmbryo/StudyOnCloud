@@ -57,7 +57,11 @@
       <% if @room.user_id == session[:user_id] %>
         <%= link_to "修正する", edit_room_path(@room), class: "btn btn-outline-soc2 btn-lg btn-block mt-5" %>
       <% else %>
-        <%= link_to "予約する", "reservate/#{@room.id}", method: :post, class: "btn btn-outline-soc1 btn-lg btn-block mt-5" %>
+        <% if @guests.where(user_id: session[:user_id]).empty? %>
+          <%= link_to "予約する", "reservate/#{@room.id}", method: :post, class: "btn btn-outline-soc1 btn-lg btn-block mt-5" %>
+        <% else %>
+          <div class="btn btn-outline-soc1 btn-lg btn-block mt-5 disabled">予約しました</div>
+        <% end %>
       <% end %>
     <% else %>
       <div class="btn btn-outline-soc1 btn-lg btn-block mt-5 disabled">ログインすると予約可能になります</div>

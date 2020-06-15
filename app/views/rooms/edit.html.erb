@@ -8,3 +8,28 @@
     </div>
   </div>
 </div>
+
+<!-- 開始、終了日時、定員を編集できないようにdisabled属性を付与 -->
+<!-- ボタンの表示を更新するに設定する -->
+<script>
+  window.onload = function() {
+    const startDatetime = document.getElementById("startDatetime")
+    const endDatetime = document.getElementById("endDatetime")
+    const capacity = document.getElementById("capacity")
+    const submitButton = document.getElementById("submitButton")
+    startDatetime.disabled = true
+    endDatetime.disabled = true
+    capacity.disabled = true
+    submitButton.value = "更新する"
+  }
+  $(document).ready( function(){
+    const startDatetime = document.getElementById("startDatetime")
+    const endDatetime = document.getElementById("endDatetime")
+    const capacity = document.getElementById("capacity")
+    const submitButton = document.getElementById("submitButton")
+    startDatetime.disabled = true
+    endDatetime.disabled = true
+    capacity.disabled = true
+    submitButton.value = "更新する"
+  });
+</script>
