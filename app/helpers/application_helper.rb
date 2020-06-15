@@ -40,7 +40,7 @@ module ApplicationHelper
   # アクセスしようとしたURLを覚えておく
   def store_location
     if request.get?
-      session[:forwarding_url] = request.original_url
+      session[:forwarding_url] = request.referer
     end
   end
 
