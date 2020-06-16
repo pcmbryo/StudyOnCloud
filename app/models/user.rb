@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   before_save { self.email = email.downcase }
   has_many :rooms
+  has_many :rooms, ->{ select('rooms.user_name AS host_user_name')}, through: :rooms
   has_many :reservations
   has_many :chats
 

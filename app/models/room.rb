@@ -30,25 +30,17 @@ class Room < ApplicationRecord
     self.where(reservations: {user_id: user_id})
   end
 
-
   # 削除されていない勉強部屋を取得
   def self.not_delete_rooms
     self.where(room_delete_flg: 0)
   end
 
   def self.join_for_index
-    self.joins(:user).includes(:reservations).references(:reservations)
+    self.eager_load(:user).eager_load(:reservations)
   end
 
   def self.select_for_index
     self.select("
-      rooms.id,
-      rooms.room_name,
-      rooms.room_detail,
-      rooms.room_start_datetime,
-      rooms.room_end_datetime,
-      rooms.room_capacity,
-      rooms.room_delete_flg,
       rooms.user_id AS host_user_id,
       users.user_name AS host_user_name,
       reservations.user_id AS guest_user_id
@@ -74,12 +66,5 @@ class Room < ApplicationRecord
   def self.home_index
     self.join_for_index.select_for_index.future_rooms.not_delete_rooms
   end
-
-
-  # def self.merge_tables2
-  #   self.joins(:user).joins("LEFT OUTER JOIN 
-  #     reservations ON rooms.id = reservations.room_id").select("rooms.id,rooms.room_name,rooms.room_detail,
-  #     rooms.room_start_datetime,rooms.room_end_datetime,rooms.room_capacity,rooms.room_delete_flg,
-  #     rooms.user_id,users.user_name AS host_user_name,reservations.user_id AS guest_user_id")
-  # end
+  
 end
