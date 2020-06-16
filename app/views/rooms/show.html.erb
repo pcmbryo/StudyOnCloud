@@ -1,44 +1,70 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="container my-5">
-  <div class="d-flex justify-content-between">
-    <div class="h2">勉強会詳細</div>
-    <% if @room.user_id == session[:user_id] %>
-      <%= link_to room_path, method: :delete, class: "btn btn-outline-soc2 btn-lg", data: { confirm: '勉強会を削除してよろしいですか？' } do %>
-        <i class="fas fa-trash-alt"></i>
+  <div class="max-width-800 mx-auto">
+    <div class="d-flex justify-content-between">
+      <div class="h2">勉強会詳細</div>
+      <% if @room.user_id == session[:user_id] %>
+        <% if Time.zone.now < @room.room_start_datetime %> 
+          <%= link_to room_path, method: :delete, class: "btn btn-outline-soc2 ml-auto mt-auto", data: { confirm: '勉強会を削除してよろしいですか？' } do %>
+            <i class="fas fa-trash-alt"></i>&nbsp;削除
+          <% end %>
+        <% end %>
       <% end %>
+    </div>
+    <table class="table mt-4">
+      <thead class="thead-light">
+        <tr>
+          <th class="align-middle">タイトル</th>
+          <th class="align-middle h5"><%= @room.room_name %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @room.room_delete_flg == 1 %>
+          <tr>
+            <th class="align-middle" scope="row"></th>
+            <td class="align-middle">この勉強会は削除されました</td>
+          </tr>
+        <% else %>
+          <tr>
+            <th class="align-middle" scope="row">詳細</th>
+            <td class="align-middle"><%= @room.room_detail %></td>
+          </tr>
+          <tr>
+            <th class="align-middle" scope="row">開催者</th>
+            <td class="align-middle"><%= link_to @room.user.user_name, @room.user %></td>
+          </tr>
+          <tr>
+            <th class="align-middle" scope="row">開催日</th>
+            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-m月%-d日") %></td>
+          </tr>
+          <tr>
+            <th class="align-middle" scope="row">時間</th>
+            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %></td>
+          </tr>
+          <tr>
+            <th class="align-middle" scope="row">定員</th>
+            <td class="align-middle"><%= @room.room_capacity %> 名</td>
+          </tr>
+          <tr>
+            <th class="align-middle" scope="row">参加者</th>
+            <td class="align-middle"><%= @guests.count %> / <%= @room.room_capacity %> 名</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if logged_in? %>
+      <% if @room.user_id == session[:user_id] %>
+        <%= link_to "修正する", edit_room_path(@room), class: "btn btn-outline-soc2 btn-lg btn-block mt-5" %>
+      <% else %>
+        <% if @guests.where(user_id: session[:user_id]).empty? %>
+          <%= link_to "予約する", "reservate/#{@room.id}", method: :post, class: "btn btn-outline-soc1 btn-lg btn-block mt-5" %>
+        <% else %>
+          <div class="btn btn-outline-soc1 btn-lg btn-block mt-5 disabled">予約しました</div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <div class="btn btn-outline-soc1 btn-lg btn-block mt-5 disabled">ログインすると予約可能になります</div>
     <% end %>
   </div>
-  <table class="table mt-4">
-    <thead class="thead-light">
-      <tr>
-        <th></th>
-        <th class="align-middle h3"><%= @room.room_name %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th class="align-middle" scope="row">詳細</th>
-        <td class="align-middle"><%= @room.room_detail %></td>
-      </tr>
-      <tr>
-        <th class="align-middle" scope="row">開催者</th>
-        <td class="align-middle"><%= @room.user.user_name %></td>
-      </tr>
-      <tr>
-        <th class="align-middle" scope="row">開催日</th>
-        <td class="align-middle"><%= @room.room_start_datetime.strftime("%-m月%-d日") %></td>
-      </tr>
-      <tr>
-        <th class="align-middle" scope="row">時間</th>
-        <td class="align-middle"><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %></td>
-      </tr>
-      <tr>
-        <th class="align-middle" scope="row">定員</th>
-        <td class="align-middle"><%= @room.room_capacity %>名</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
-
-

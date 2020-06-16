@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="container my-5">
+  <div class="mx-auto max-width-600">
+    <div class="h2">勉強会編集</div>
+    <div class="mt-4">
+      <%= render "rooms/form" %>
+    </div>
+  </div>
+</div>
+
+<!-- 開始、終了日時、定員を編集できないようにdisabled属性を付与 -->
+<!-- ボタンの表示を更新するに設定する -->
+<script>
+  window.onload = function() {
+    const startDatetime = document.getElementById("startDatetime")
+    const endDatetime = document.getElementById("endDatetime")
+    const capacity = document.getElementById("capacity")
+    const submitButton = document.getElementById("submitButton")
+    startDatetime.disabled = true
+    endDatetime.disabled = true
+    capacity.disabled = true
+    submitButton.value = "更新する"
+  }
+  $(document).ready( function(){
+    const startDatetime = document.getElementById("startDatetime")
+    const endDatetime = document.getElementById("endDatetime")
+    const capacity = document.getElementById("capacity")
+    const submitButton = document.getElementById("submitButton")
+    startDatetime.disabled = true
+    endDatetime.disabled = true
+    capacity.disabled = true
+    submitButton.value = "更新する"
+  });
+</script>

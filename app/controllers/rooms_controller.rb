@@ -19,8 +19,11 @@ class RoomsController < ApplicationController
   def show
     @page_title = "勉強会詳細"
     @room = Room.find(params[:id])
+    # 参加者一覧を取得
+    @guests = Reservation.where(room_id: params[:id])
   end
 
+  # 作成確認画面
   def confirm
     
   end
@@ -37,6 +40,22 @@ class RoomsController < ApplicationController
     end
   end
 
+  # 勉強会編集画面
+  def edit
+    @room = Room.find(params[:id])
+  end
+
+  # 勉強会編集
+  def update
+    room = Room.find(params[:id])
+    if room.update(room_params)
+      redirect_to room
+    else
+      error_to_flush room
+      redirect_to room
+    end
+  end
+
   # 勉強会削除
   def destroy
     room = Room.find(params[:id])
@@ -45,7 +64,21 @@ class RoomsController < ApplicationController
       flash[:success] = "勉強会を削除しました"
       redirect_to root_path
     else
+      flash[:danger] = "削除に失敗しました"
+      redirect_to room
+    end
+  end
 
+  # 参加予約
+  def reservate
+    room = Room.find(params[:id])
+    reservation = Reservation.new(room_id: room.id, user_id: session[:user_id])
+    if reservation.save
+      flash[:success] = "予約が完了しました"
+      redirect_to room
+    else
+      flash[:danger] = "予約に失敗しました"
+      redirect_to room
     end
   end
 

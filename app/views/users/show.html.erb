@@ -1,8 +1,8 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<!-- 編集ボタン・編集ポップアップのレイアウト -->
 <div class="container my-5">
   <div class="max-width-800 mx-auto">
+    <!-- 編集ボタン・編集ポップアップ -->
     <div class="text-right">
       <% if session[:user_id] == @user.id %>
         <% if current_user.email != "guest@sysdog.com" %>
@@ -11,7 +11,7 @@
       <% end %>
     </div>
     <%= render partial: 'users/edit', locals: { user: @user } %>
-    <!-- ここまで編集レイアウト -->
+    <!-- ここまで編集 -->
 
     <!-- ユーザー情報 -->
     <div class="mb-5">
