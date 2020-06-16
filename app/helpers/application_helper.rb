@@ -33,15 +33,13 @@ module ApplicationHelper
 
   # 記憶したURL（もしくはデフォルト値）にリダイレクト
   def redirect_back_or(default)
-    redirect_to(session[:forwarding_url] || default)
-    session.delete(:forwarding_url)
+    redirect_to(session[:current_url] || default)
+    session.delete(:current_url)
   end
 
   # アクセスしようとしたURLを覚えておく
   def store_location
-    if request.get?
-      session[:forwarding_url] = request.referer
-    end
+    session[:current_url] = request.referer
   end
 
   # ログインしているかを確認

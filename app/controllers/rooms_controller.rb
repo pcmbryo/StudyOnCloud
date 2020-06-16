@@ -42,12 +42,12 @@ class RoomsController < ApplicationController
 
   # 勉強会編集画面
   def edit
-    @room = Room.find_by(params[:id])
+    @room = Room.find(params[:id])
   end
 
   # 勉強会編集
   def update
-    room = Room.find_by(params[:id])
+    room = Room.find(params[:id])
     if room.update(room_params)
       redirect_to room
     else

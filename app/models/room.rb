@@ -22,12 +22,12 @@ class Room < ApplicationRecord
 
   # 開催日が過去の勉強部屋を返す
   def self.past_rooms
-    self.where.not(room_start_datetime: Time.zone.now..Float::INFINITY)
+    self.where.not(room_end_datetime: Time.zone.now..Float::INFINITY)
   end
 
   # 開催日が未来の勉強部屋を返す
   def self.future_rooms
-    self.where(room_start_datetime: Time.zone.now..Float::INFINITY)
+    self.where(room_end_datetime: Time.zone.now..Float::INFINITY)
   end
 
   # 開催者が自分の勉強部屋を取得
