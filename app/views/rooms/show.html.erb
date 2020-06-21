@@ -54,14 +54,18 @@
       </tbody>
     </table>
     <% if logged_in? %>
-      <% if @room.user_id == session[:user_id] %>
-        <%= link_to "修正する", edit_room_path(@room), class: "btn btn-outline-soc2 btn-lg btn-block mt-5" %>
-      <% else %>
-        <% if @guests.where(user_id: session[:user_id]).empty? %>
-          <%= link_to "予約する", "reservate/#{@room.id}", method: :post, class: "btn btn-outline-soc1 btn-lg btn-block mt-5" %>
+      <% if @room.room_start_datetime > Time.zone.now %>
+        <% if @room.user_id == session[:user_id] %>
+          <%= link_to "修正する", edit_room_path(@room), class: "btn btn-outline-soc2 btn-lg btn-block mt-5" %>
         <% else %>
-          <div class="btn btn-outline-soc1 btn-lg btn-block mt-5 disabled">予約しました</div>
+          <% if @guests.where(user_id: session[:user_id]).empty? %>
+            <%= link_to "予約する", room_reservations_path(@room), method: :post, class: "btn btn-soc1 btn-lg btn-block mt-5" %>
+          <% else %>
+            <%= link_to "キャンセルする", room_reservation_path(@room), method: :delete, class: "btn btn-outline-soc1 btn-lg btn-block mt-5" %>
+          <% end %>
         <% end %>
+      <% elsif @room.room_end_datetime > Time.zone.now %>
+        <%= link_to "入室する", "#", class: "btn btn-soc2 btn-lg btn-block mt-5" %>
       <% end %>
     <% else %>
       <div class="btn btn-outline-soc1 btn-lg btn-block mt-5 disabled">ログインすると予約可能になります</div>

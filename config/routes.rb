@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   resources :users, except: [:index, :edit, :delete]
 
   # 勉強会
-  resources :rooms, except: [:index]
+  resources :rooms, except: [:index] do
+    resources :reservations, only: [:create, :destroy]
+  end
   post '/rooms/confirm', to: 'rooms#confirm'
-  post '/rooms/reservate/:id', to: 'rooms#reservate'
 
   # チャット
   get '/chats', to: 'chats#show'
