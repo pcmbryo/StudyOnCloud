@@ -24,10 +24,12 @@ class UsersController < ApplicationController
     # 自分の開催勉強会
     @host_plans = Room.host_plans(@user.id)
     @host_histories = Room.host_histories(@user.id)
+    @host_now = Room.host_now(@user.id)
 
     # 自分の予約している勉強会
     @guest_plans = Room.guest_plans(@user.id)
     @guest_histories = Room.guest_histories(@user.id)
+    @guest_now = Room.guest_now(@user.id)
   end
 
   # ユーザー作成

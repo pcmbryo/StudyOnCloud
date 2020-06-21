@@ -32,6 +32,22 @@
       </div>
     </div>
     <hr>
+    <% if !@host_now.empty? %>
+      <div class="mt-5">
+        <div class="h3">進行中</div>
+        <% @host_now.each do |room| %>
+          <%= render partial: 'rooms/room', locals: { room: room } %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if !@guest_now.empty? %>
+      <div class="mt-5">
+        <div class="h3">進行中</div>
+        <% @guest_now.each do |room| %>
+          <%= render partial: 'rooms/room', locals: { room: room } %>
+        <% end %>
+      </div>
+    <% end %>
     <div class="mt-5">
       <div class="h3">開催予定</div>
       <% if @host_plans.empty? %>
