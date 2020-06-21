@@ -65,7 +65,11 @@
           <% end %>
         <% end %>
       <% elsif @room.room_end_datetime > Time.zone.now %>
-        <%= link_to "入室する", "#", class: "btn btn-soc2 btn-lg btn-block mt-5" %>
+        <% if @room.user_id == session[:user_id] || @guests.where(user_id: session[:user_id]).present? %>
+          <%= link_to "入室する", "#", class: "btn btn-soc2 btn-lg btn-block mt-5" %>
+        <% else %>
+          <div class="btn btn-outline-soc2 btn-lg btn-block mt-5 disabled">開催中</div>
+        <% end %>
       <% end %>
     <% else %>
       <div class="btn btn-outline-soc1 btn-lg btn-block mt-5 disabled">ログインすると予約可能になります</div>
