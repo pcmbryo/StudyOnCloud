@@ -36,11 +36,11 @@
           </tr>
           <tr>
             <th class="align-middle" scope="row">開催日</th>
-            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-m月%-d日") %></td>
+            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-m月%-d日") %>（<%= day_to_japanese(@room) %>）</td>
           </tr>
           <tr>
             <th class="align-middle" scope="row">時間</th>
-            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %></td>
+            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %>（<%= room_hours(@room) %>）</td>
           </tr>
           <tr>
             <th class="align-middle" scope="row">定員</th>
