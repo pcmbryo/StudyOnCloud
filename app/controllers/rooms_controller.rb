@@ -134,9 +134,6 @@ class RoomsController < ApplicationController
       room_start_datetime = Time.zone.parse(room_confirm.room_start_date + " " + room_confirm.room_start_time)
       room_end_datetime = Time.zone.parse(room_confirm.room_end_date + " " + room_confirm.room_end_time)
 
-      host_rooms = Room.host_plans(session[:user_id])
-      guest_rooms = Room.guest_plans(session[:user_id])
-      
       if room_start_datetime < Time.zone.now
         flash[:danger] = "現在時刻より前に勉強会は開催できません"
         return
@@ -147,15 +144,15 @@ class RoomsController < ApplicationController
         return
       end
 
-      host_rooms.each do |room|
-        if (room.room_start_datetime > room_start_datetime && room.room_start_datetime < room_end_datetime) || (room.room_end_datetime > room_start_datetime && room.room_end_datetime < room_end_datetime)
+      Room.host_plans(session[:user_id]).each do |room|
+        if (room.room_start_datetime >= room_start_datetime && room.room_start_datetime <= room_end_datetime) || (room.room_end_datetime >= room_start_datetime && room.room_end_datetime <= room_end_datetime)
           flash[:danger] = "開催または参加予定の勉強会と日時が重複しています"
         return
         end
       end
 
-      guest_rooms.each do |room|
-        if (room.room_start_datetime > room_start_datetime && room.room_start_datetime < room_end_datetime) || (room.room_end_datetime > room_start_datetime && room.room_end_datetime < room_end_datetime)
+      Room.guest_plans(session[:user_id]).each do |room|
+        if (room.room_start_datetime >= room_start_datetime && room.room_start_datetime <= room_end_datetime) || (room.room_end_datetime >= room_start_datetime && room.room_end_datetime <= room_end_datetime)
           flash[:danger] = "開催または参加予定の勉強会と日時が重複しています"
         return
         end
