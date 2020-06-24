@@ -2,12 +2,12 @@
         
   <div class="form-group">
     <%= f.label :room_name, "タイトル" %>
-    <%= f.text_field :room_name, class: "form-control" %>
+    <%= f.text_field :room_name, value: session[:room_name], class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :room_detail, "内容" %>
-    <%= f.text_area :room_detail, size: "x4", class: "form-control" %>
+    <%= f.text_area :room_detail, value: session[:room_detail], size: "x4", class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -15,7 +15,7 @@
     <div class="text-muted small">クリックしてカレンダーを表示</div>
     <div class="row">
       <div class="col-6">
-        <%= f.text_field :room_start_date, value: date_now, readonly: true, class: "form-control", id: "startDate" %>
+        <%= f.text_field :room_start_date, value: start_date_now, readonly: true, class: "form-control", id: "startDate" %>
       </div>
       <div class="col-6">
         <%= f.select :room_start_time, time_option, {selected: time_option[start_time_init]}, {class: "form-control", id: "startTime"} %>
@@ -27,7 +27,7 @@
     <div class="text-muted small">クリックしてカレンダーを表示</div>
     <div class="row">
       <div class="col-6">
-        <%= f.text_field :room_end_date, value: date_now, readonly: true, class: "form-control", id: "endDate" %>
+        <%= f.text_field :room_end_date, value: end_date_now, readonly: true, class: "form-control", id: "endDate" %>
       </div>
       <div class="col-6">
         <%= f.select :room_end_time, time_option, {selected: time_option[end_time_init]}, {class: "form-control", id: "endTime"} %>
@@ -37,7 +37,7 @@
 
   <div class="form-group">
     <%= f.label :room_capacity, "定員" %>
-    <%= f.select :room_capacity, capacity_option, {selected: capacity_option[9]}, {class: "form-control", id: "capacity"} %>
+    <%= f.select :room_capacity, capacity_option, {selected: capacity_option[capacity_init]}, {class: "form-control", id: "capacity"} %>
   </div>
   
   <%= f.submit "作成する", class: "btn btn-soc1 btn-lg btn-block mt-5", id: "submitButton" %>

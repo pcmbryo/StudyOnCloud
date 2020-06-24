@@ -46,8 +46,26 @@ module RoomsHelper
   end
 
   # 現在の日付を返す
-  def date_now
-    Time.zone.now.strftime("%Y/%m/%d")
+  def start_date_now
+    if session[:room_start_date]
+      session[:room_start_date]
+    else
+      Time.zone.now.strftime("%Y/%m/%d")
+    end
+  end
+
+  def end_date_now
+    now = Time.zone.now
+    border = Time.zone.parse("22:30")
+    if session[:room_end_date]
+      session[:room_end_date]
+    else
+      if now >= border
+        Time.zone.now.next_day.strftime("%Y/%m/%d")
+      else
+        Time.zone.now.strftime("%Y/%m/%d")
+      end
+    end
   end
 
   # 時刻の選択肢を返す
@@ -73,13 +91,28 @@ module RoomsHelper
 
   # 開始時刻の初期値を返す
   def start_time_init
-    now = Time.zone.now
-    now.hour * 2 + now.min / 30 + 1
+    if session[:room_start_time]
+      time = Time.zone.parse(session[:room_start_time])
+      time.hour * 2 + time.min / 30
+    else
+      time = Time.zone.now
+      time.hour * 2 + time.min / 30 + 1
+    end
   end
 
   # 終了時刻の初期値を返す
   def end_time_init
-    start_time_init + 2
+    if session[:room_start_time]
+      time = Time.zone.parse(session[:room_end_time])
+      time.hour * 2 + time.min / 30
+    else
+      if start_time_init == 46
+        0
+      elsif start_time_init == 47
+        1
+      end
+      start_time_init + 2
+    end
   end
 
   # 入力用データから保存用データへ変換する
@@ -105,6 +138,14 @@ module RoomsHelper
       user_id: room_confirm.user_id)
     
     return room
+  end
+
+  def capacity_init
+    if session[:room_capacity]
+      session[:room_capacity].to_i - 1
+    else
+      9
+    end
   end
 end
 

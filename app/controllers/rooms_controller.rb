@@ -28,6 +28,13 @@ class RoomsController < ApplicationController
   def confirm
     @page_title = "勉強会の作成確認"
     room_confirm = RoomConfirm.new(room_confirm_params)
+    session[:room_name] = room_confirm.room_name
+    session[:room_detail] = room_confirm.room_detail
+    session[:room_start_date] = room_confirm.room_start_date
+    session[:room_start_time] = room_confirm.room_start_time
+    session[:room_end_date] = room_confirm.room_end_date
+    session[:room_end_time] = room_confirm.room_end_time
+    session[:room_capacity] = room_confirm.room_capacity
     if room_confirm.invalid?
       error_to_flush room_confirm
       redirect_to new_room_path
@@ -47,6 +54,13 @@ class RoomsController < ApplicationController
     if params[:back]
       redirect_to new_room_path
     elsif room.save
+      session.delete(:room_name)
+      session.delete(:room_detail)
+      session.delete(:room_start_date)
+      session.delete(:room_start_time)
+      session.delete(:room_end_date)
+      session.delete(:room_end_time)
+      session.delete(:room_capacity)
       flash[:success] = "以下の内容で作成しました"
       redirect_to room
     else
