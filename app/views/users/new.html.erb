@@ -6,13 +6,13 @@
       <%= form_for(@user) do |f| %>
         
         <div class="form-group mt-4">
-          <%= f.label :user_name, "ニックネーム" %>
-          <%= f.text_field :user_name, placeholder: "例）スタクラ", class: "form-control" %>
+          <%= f.label :user_name, "ユーザー名" %>
+          <%= f.text_field :user_name, placeholder: "例）スタクラ", value: session[:user_name_login], class: "form-control" %>
         </div>
 
         <div class="form-group">
           <%= f.label :email, "メールアドレス" %>
-          <%= f.text_field :email, placeholder: "例）email@sysdog.com", class: "form-control" %>
+          <%= f.text_field :email, placeholder: "例）email@sysdog.com", value: session[:email_login], class: "form-control" %>
         </div>
 
         <div class="form-group">
@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :password_confirmation, "パスワード（再入力）" %>
+          <%= f.label :password_confirmation, "パスワード（確認用）" %>
           <%= f.password_field :password_confirmation, placeholder: "●●●●●●●●", class: "form-control" %>
         </div>
         

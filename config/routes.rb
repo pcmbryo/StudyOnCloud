@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   # 勉強会
   resources :rooms, except: [:index] do
     resources :reservations, only: [:create, :destroy]
+    collection do
+      post :confirm
+    end
   end
-  post '/rooms/confirm', to: 'rooms#confirm'
 
   # チャット
   get '/chats', to: 'chats#show'

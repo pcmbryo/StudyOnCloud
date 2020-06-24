@@ -3,7 +3,6 @@
 <div class="container my-5">
   <div class="max-width-800 mx-auto">
     <div class="d-flex justify-content-between">
-      <div class="h2">勉強会詳細</div>
       <% if @room.user_id == session[:user_id] %>
         <% if Time.zone.now < @room.room_start_datetime %> 
           <%= link_to room_path, method: :delete, class: "btn btn-outline-soc2 ml-auto mt-auto", data: { confirm: '勉強会を削除してよろしいですか？' } do %>
@@ -12,47 +11,61 @@
         <% end %>
       <% end %>
     </div>
-    <table class="table mt-4">
-      <thead class="thead-light">
-        <tr>
-          <th class="align-middle">タイトル</th>
-          <th class="align-middle h5"><%= @room.room_name %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @room.room_delete_flg == 1 %>
-          <tr>
-            <th class="align-middle" scope="row"></th>
-            <td class="align-middle">この勉強会は削除されました</td>
-          </tr>
-        <% else %>
-          <tr>
-            <th class="align-middle" scope="row">詳細</th>
-            <td class="align-middle"><%= @room.room_detail %></td>
-          </tr>
-          <tr>
-            <th class="align-middle" scope="row">開催者</th>
-            <td class="align-middle"><%= link_to @room.user.user_name, @room.user %></td>
-          </tr>
-          <tr>
-            <th class="align-middle" scope="row">開催日</th>
-            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-m月%-d日") %>（<%= day_to_japanese(@room) %>）</td>
-          </tr>
-          <tr>
-            <th class="align-middle" scope="row">時間</th>
-            <td class="align-middle"><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %>（<%= room_hours(@room) %>）</td>
-          </tr>
-          <tr>
-            <th class="align-middle" scope="row">定員</th>
-            <td class="align-middle"><%= @room.room_capacity %> 名</td>
-          </tr>
-          <tr>
-            <th class="align-middle" scope="row">参加者</th>
-            <td class="align-middle"><%= @guests.count %> / <%= @room.room_capacity %> 名</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="row my-4 border-bottom pb-2">
+      <div class="h3 mx-auto"><%= @room.room_name %></div>
+    </div>
+    <% if @room.room_delete_flg == 1 %>
+      <div>この勉強会は削除されました</div>
+    <% else %>
+      <div class="row pt-2">
+        <div class="col-3 border-right border-success">
+          <div class="float-right">詳細</div>
+        </div>
+        <div class="col-9">
+          <div class=""><%= @room.room_detail %></div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 border-right border-success">
+          <div class="float-right">開催日</div>
+        </div>
+        <div class="col-9">
+          <div class=""><%= @room.room_start_datetime.strftime("%-m月%-d日") %>（<%= day_to_japanese(@room) %>）</div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 border-right border-success">
+          <div class="float-right">時間</div>
+        </div>
+        <div class="col-9">
+          <div class=""><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %>（<%= room_hours(@room) %>）</div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 border-right border-success">
+          <div class="float-right">定員</div>
+        </div>
+        <div class="col-9">
+          <div class=""><%= @room.room_capacity %> 名</div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 border-right border-success">
+          <div class="float-right">開催者</div>
+        </div>
+        <div class="col-9">
+          <div class=""><%= link_to @room.user.user_name, @room.user %></div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-3 border-right border-success">
+          <div class="float-right">参加者</div>
+        </div>
+        <div class="col-9">
+          <div class=""><%= @guests.count %> / <%= @room.room_capacity %> 名</div>
+        </div>
+      </div>
+    <% end %>
     <% if logged_in? %>
       <% if @room.room_start_datetime > Time.zone.now %>
         <% if @room.user_id == session[:user_id] %>

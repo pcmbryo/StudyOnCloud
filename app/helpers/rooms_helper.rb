@@ -1,12 +1,12 @@
 module RoomsHelper
   # 定員数の配列を返す
-  def room_capacity
+  def capacity_option
     room_capacity = 10
-    array = []
+    capacity_option = []
     room_capacity.times do |i|
-      array.push(i + 1)
+      capacity_option.push(i + 1)
     end
-    array
+    capacity_option
   end
 
   # 曜日を日本語に変換する

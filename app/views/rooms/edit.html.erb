@@ -4,7 +4,35 @@
   <div class="mx-auto max-width-600">
     <div class="h2">勉強会編集</div>
     <div class="mt-4">
-      <%= render "rooms/form" %>
+      <%= form_with model: @room, local: true do |f| %>
+        
+        <div class="form-group">
+          <%= f.label :room_name, "タイトル" %>
+          <%= f.text_field :room_name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room_detail, "内容" %>
+          <%= f.text_area :room_detail, size: "x4", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room_start_datetime, "開始日時" %>
+          <%= f.datetime_field :room_start_datetime, readonly: true, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :room_end_datetime, "終了日時" %>
+          <%= f.datetime_field :room_end_datetime, readonly: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :room_capacity, "定員" %>
+          <%= f.select :room_capacity, capacity_option, {}, {class: "form-control", id: "capacity"} %>
+        </div>
+        
+        <%= f.submit "作成する", class: "btn btn-soc1 btn-lg btn-block mt-5", id: "submitButton" %>
+
+      <% end %>
     </div>
   </div>
 </div>
@@ -13,22 +41,14 @@
 <!-- ボタンの表示を更新するに設定する -->
 <script>
   window.onload = function() {
-    const startDatetime = document.getElementById("startDatetime")
-    const endDatetime = document.getElementById("endDatetime")
     const capacity = document.getElementById("capacity")
     const submitButton = document.getElementById("submitButton")
-    startDatetime.disabled = true
-    endDatetime.disabled = true
     capacity.disabled = true
     submitButton.value = "更新する"
   }
   $(document).ready( function(){
-    const startDatetime = document.getElementById("startDatetime")
-    const endDatetime = document.getElementById("endDatetime")
     const capacity = document.getElementById("capacity")
     const submitButton = document.getElementById("submitButton")
-    startDatetime.disabled = true
-    endDatetime.disabled = true
     capacity.disabled = true
     submitButton.value = "更新する"
   });

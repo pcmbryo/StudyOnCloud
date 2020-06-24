@@ -39,8 +39,7 @@ class UsersController < ApplicationController
       #ユーザー作成完了後ログインする
       log_in(@user)
       flash[:success] = "新規登録完了しました"
-      #redirect_to user_url(@user)はredirect_to userと省略可能
-      redirect_to user_url(@user)
+      redirect_to @user
     else
       error_to_flush @user
       redirect_to new_user_path

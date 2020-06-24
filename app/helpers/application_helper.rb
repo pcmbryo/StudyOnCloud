@@ -62,4 +62,16 @@ module ApplicationHelper
       flash[:danger] = error_messages
     end
   end
+
+  # オブジェクトがもつエラーメッセージをフラッシュに格納する(render用)
+  def error_to_flush_now object
+    if object.errors.any?
+      error_messages = ""
+      object.errors.full_messages.each do |msg| 
+        error_messages += msg.to_s + "<br>"
+        #出力の際に(.html_safe)をつけると<br>が機能する。=> shared/_flash.html.erbに追加済み
+      end
+      flash.now[:danger] = error_messages
+    end
+  end
 end

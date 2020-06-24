@@ -8,3 +8,23 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#startDate').datepicker({
+    dateFormat: "yy/mm/dd",
+    duration: 300,
+    showAnim: 'show'
+  });
+  $('#endDate').datepicker({
+    dateFormat: "yy/mm/dd",
+    duration: 300,
+    showAnim: 'show'
+  });
+  var $startDate = $('#startDate');
+  var $endDate = $('#endDate');
+  var $startTime = $('#startTime');
+  var $endTime = $('#endTime');
+  $startDate.on('keyup change',function(){
+    $endDate.val($startDate.val());
+  })
+</script>

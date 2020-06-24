@@ -1,2 +1,59 @@
-<%= @room.room_name %>
-<%= @room.room_detail %>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> 
+
+ <div class="container my-5">
+  <div class="max-width-800 mx-auto">
+    <div class="h4">以下の内容で作成しますか？</div>
+    <div class="">※開催日時と定員は後から変更できません</div>
+    <div class="row my-4 border-bottom pb-2">
+      <div class="h3 mx-auto"><%= @room.room_name %></div>
+    </div>
+    <div class="row pt-2">
+      <div class="col-3 border-right border-success">
+        <div class="float-right">詳細</div>
+      </div>
+      <div class="col-9">
+        <div class=""><%= @room.room_detail %></div>
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col-3 border-right border-success">
+        <div class="float-right">開催日</div>
+      </div>
+      <div class="col-9">
+        <div class=""><%= @room.room_start_datetime.strftime("%-m月%-d日") %>（<%= day_to_japanese(@room) %>）</div>
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col-3 border-right border-success">
+        <div class="float-right">時間</div>
+      </div>
+      <div class="col-9">
+        <div class=""><%= @room.room_start_datetime.strftime("%-H:%M") %> 〜 <%= @room.room_end_datetime.strftime("%-H:%M") %>（<%= room_hours(@room) %>）</div>
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col-3 border-right border-success">
+        <div class="float-right">定員</div>
+      </div>
+      <div class="col-9">
+        <div class=""><%= @room.room_capacity %> 名</div>
+      </div>
+    </div>
+    <%= form_with model: @room, url: "/rooms" do |f| %>
+      <%= f.hidden_field :room_name %>
+      <%= f.hidden_field :room_detail %>
+      <%= f.hidden_field :room_start_datetime %>
+      <%= f.hidden_field :room_end_datetime %>
+      <%= f.hidden_field :room_capacity %>
+      <%= f.hidden_field :user_id %>
+      <div class="form-row">
+        <div class="col-6">
+          <%= f.submit "戻る", name: :back, class: "btn btn-outline-soc1 btn-lg btn-block mt-5" %>
+        </div>
+        <div class="col-6">
+          <%= f.submit "作成する", class: "btn btn-soc1 btn-lg btn-block mt-5" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

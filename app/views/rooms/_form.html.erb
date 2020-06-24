@@ -1,8 +1,8 @@
-<%= form_with model: @room do |f| %>
+<%= form_with model: @room_confirm, local: true, url: '/rooms/confirm' do |f| %>
         
   <div class="form-group">
     <%= f.label :room_name, "タイトル" %>
-    <%= f.text_field :room_name, class: "form-control disabled" %>
+    <%= f.text_field :room_name, class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -11,18 +11,33 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :room_start_datetime, "開始日時" %>
-    <%= f.datetime_field :room_start_datetime, class: "form-control", id: "startDatetime" %>
+    <%= f.label :room_start_date, "開始日時" %>
+    <div class="text-muted small">クリックしてカレンダーを表示</div>
+    <div class="row">
+      <div class="col-6">
+        <%= f.text_field :room_start_date, value: date_now, readonly: true, class: "form-control", id: "startDate" %>
+      </div>
+      <div class="col-6">
+        <%= f.select :room_start_time, time_option, {selected: time_option[start_time_init]}, {class: "form-control", id: "startTime"} %>
+      </div>
+    </div>
   </div>
-
   <div class="form-group">
-    <%= f.label :room_start_datetime, "終了日時" %>
-    <%= f.datetime_field :room_end_datetime, class: "form-control", id: "endDatetime" %>
+    <%= f.label :room_end_date, "終了日時" %>
+    <div class="text-muted small">クリックしてカレンダーを表示</div>
+    <div class="row">
+      <div class="col-6">
+        <%= f.text_field :room_end_date, value: date_now, readonly: true, class: "form-control", id: "endDate" %>
+      </div>
+      <div class="col-6">
+        <%= f.select :room_end_time, time_option, {selected: time_option[end_time_init]}, {class: "form-control", id: "endTime"} %>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
     <%= f.label :room_capacity, "定員" %>
-    <%= f.select :room_capacity, room_capacity, {}, class: "form-control", id: "capacity" %>
+    <%= f.select :room_capacity, capacity_option, {selected: capacity_option[9]}, {class: "form-control", id: "capacity"} %>
   </div>
   
   <%= f.submit "作成する", class: "btn btn-soc1 btn-lg btn-block mt-5", id: "submitButton" %>

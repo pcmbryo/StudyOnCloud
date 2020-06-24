@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   include ApplicationHelper
+  include RoomsHelper
 
   # ログインしていないと実行できないアクション
   before_action :logged_in_user, except: [:index, :show]
@@ -7,7 +8,7 @@ class RoomsController < ApplicationController
   # 勉強会作成画面
   def new
     @page_title = "勉強会の作成"
-    @room = Room.new
+    @room_confirm = RoomConfirm.new
   end
 
   # 勉強会一覧画面
@@ -25,17 +26,31 @@ class RoomsController < ApplicationController
 
   # 作成確認画面
   def confirm
-    
+    @page_title = "勉強会の作成確認"
+    room_confirm = RoomConfirm.new(room_confirm_params)
+    if room_confirm.invalid?
+      error_to_flush room_confirm
+      redirect_to new_room_path
+    else
+      @room = parse_room(room_confirm)
+      if @room == nil
+        redirect_to new_room_path
+      else
+        render :confirm
+      end
+    end
   end
 
   # 勉強会作成
   def create
-    @room = Room.new(room_params)
-    if @room.save
+    room = Room.new(room_params)
+    if params[:back]
+      redirect_to new_room_path
+    elsif room.save
       flash[:success] = "以下の内容で作成しました"
-      redirect_to @room
+      redirect_to room
     else
-      error_to_flush @room
+      error_to_flush room
       redirect_to new_room_path
     end
   end
@@ -69,27 +84,26 @@ class RoomsController < ApplicationController
     end
   end
 
-  # 参加予約
-  def reservate
-    room = Room.find(params[:id])
-    reservation = Reservation.new(room_id: room.id, user_id: session[:user_id])
-    if reservation.save
-      flash[:success] = "予約が完了しました"
-      redirect_to room
-    else
-      flash[:danger] = "予約に失敗しました"
-      redirect_to room
-    end
-  end
-
   private
     def room_params
       params.require(:room)
         .permit(:room_name,
-        :room_detail, 
-        :room_start_datetime, 
-        :room_end_datetime, 
-        :room_capacity)
-        .merge(user_id: current_user.id)
+        :room_detail,
+        :room_start_datetime,
+        :room_end_datetime,
+        :room_capacity,
+        :user_id)
+    end
+
+    def room_confirm_params
+      params.require(:room_confirm)
+        .permit(:room_name,
+        :room_detail,
+        :room_start_date,
+        :room_start_time,
+        :room_end_date,
+        :room_end_time,
+        :room_capacity).
+        merge(user_id: current_user.id)
     end
 end
