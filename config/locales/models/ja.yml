@@ -11,3 +11,9 @@ ja:
         password_confirmation: パスワード（確認用）
         created_at: 登録日時
         updated_at: 更新日時
+  activemodel:
+    models:
+      room_confirm: 勉強会（確認用）
+    attributes:
+      room_confirm:
+        room_name: タイトル
