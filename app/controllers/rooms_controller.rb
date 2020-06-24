@@ -1,9 +1,9 @@
 class RoomsController < ApplicationController
   include ApplicationHelper
-  include RoomsHelper
 
   # ログインしていないと実行できないアクション
   before_action :logged_in_user, except: [:index, :show]
+  before_action :correct_room, only: [:edit, :update, :delete]
 
   # 勉強会作成画面
   def new
@@ -71,6 +71,7 @@ class RoomsController < ApplicationController
 
   # 勉強会編集画面
   def edit
+    @page_title = "勉強会編集"
     @room = Room.find(params[:id])
   end
 
@@ -119,5 +120,37 @@ class RoomsController < ApplicationController
         :room_end_time,
         :room_capacity).
         merge(user_id: current_user.id)
+    end
+
+    def correct_room
+      room = Room.find(params[:id])
+      unless room.user_id == session[:user_id]
+        redirect_to room
+      end
+    end
+    
+    # 入力用データから保存用データへ変換する
+    def parse_room(room_confirm)
+      room_start_datetime = Time.zone.parse(room_confirm.room_start_date + " " + room_confirm.room_start_time)
+      room_end_datetime = Time.zone.parse(room_confirm.room_end_date + " " + room_confirm.room_end_time)
+      
+      if room_start_datetime < Time.zone.now
+        flash[:danger] = "現在時刻より前に勉強会は開催できません"
+        return
+      end
+
+      if room_start_datetime >= room_end_datetime
+        flash[:danger] = "終了日時が開始日時より前になっています"
+        return
+      end
+
+      room = Room.new(room_name: room_confirm.room_name,
+        room_detail: room_confirm.room_detail,
+        room_start_datetime: room_start_datetime,
+        room_end_datetime: room_end_datetime,
+        room_capacity: room_confirm.room_capacity,
+        user_id: room_confirm.user_id)
+      
+      return room
     end
 end

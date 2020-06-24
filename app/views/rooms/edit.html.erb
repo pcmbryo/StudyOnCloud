@@ -2,7 +2,12 @@
 
 <div class="container my-5">
   <div class="mx-auto max-width-600">
-    <div class="h2">勉強会編集</div>
+    <div class="d-flex justify-content-between">
+      <div class="h2">勉強会編集</div>
+      <%= link_to room_path, method: :delete, class: "btn btn-outline-soc2 ml-auto mt-auto", data: { confirm: '勉強会を削除してよろしいですか？' } do %>
+        <i class="fas fa-trash-alt"></i>&nbsp;削除
+      <% end %>
+      </div>
     <div class="mt-4">
       <%= form_with model: @room, local: true do |f| %>
         
@@ -30,7 +35,7 @@
           <%= f.select :room_capacity, capacity_option, {}, {class: "form-control", id: "capacity"} %>
         </div>
         
-        <%= f.submit "作成する", class: "btn btn-soc1 btn-lg btn-block mt-5", id: "submitButton" %>
+        <%= f.submit "更新する", class: "btn btn-soc2 btn-lg btn-block mt-5", id: "submitButton" %>
 
       <% end %>
     </div>
@@ -42,14 +47,10 @@
 <script>
   window.onload = function() {
     const capacity = document.getElementById("capacity")
-    const submitButton = document.getElementById("submitButton")
     capacity.disabled = true
-    submitButton.value = "更新する"
   }
   $(document).ready( function(){
     const capacity = document.getElementById("capacity")
-    const submitButton = document.getElementById("submitButton")
     capacity.disabled = true
-    submitButton.value = "更新する"
   });
 </script>

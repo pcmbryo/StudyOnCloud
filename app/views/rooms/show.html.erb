@@ -3,13 +3,6 @@
 <div class="container my-5">
   <div class="max-width-800 mx-auto">
     <div class="d-flex justify-content-between">
-      <% if @room.user_id == session[:user_id] %>
-        <% if Time.zone.now < @room.room_start_datetime %> 
-          <%= link_to room_path, method: :delete, class: "btn btn-outline-soc2 ml-auto mt-auto", data: { confirm: '勉強会を削除してよろしいですか？' } do %>
-            <i class="fas fa-trash-alt"></i>&nbsp;削除
-          <% end %>
-        <% end %>
-      <% end %>
     </div>
     <div class="row my-4 border-bottom pb-2">
       <div class="h3 mx-auto"><%= @room.room_name %></div>
