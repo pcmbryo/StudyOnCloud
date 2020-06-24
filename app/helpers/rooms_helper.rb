@@ -37,7 +37,7 @@ module RoomsHelper
     room_hours = (room.room_end_datetime - room.room_start_datetime) / 3600
     hour = room_hours.to_i
     minute = room_hours - hour
-    if minute > 0.5
+    if minute >= 0.5
       minute = ".5"
     else
       minute = ""
@@ -144,7 +144,7 @@ module RoomsHelper
     if session[:room_capacity]
       session[:room_capacity].to_i - 1
     else
-      9
+      4
     end
   end
 end
