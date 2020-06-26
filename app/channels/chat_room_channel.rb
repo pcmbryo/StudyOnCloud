@@ -1,6 +1,8 @@
 class ChatRoomChannel < ApplicationCable::Channel
+  include ApplicationHelper
+
   def subscribed
-    stream_from "chat_room_channel"
+    stream_from "chat_room_channel_#{params['room']}"
   end
 
   def unsubscribed
@@ -8,6 +10,6 @@ class ChatRoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    Chat.create! text: data['message'], user_id: 1, room_id: 1 
+    Chat.create!(text: data['message'], user_id: current_client_user.id, room_id: params['room'] )
   end
 end

@@ -9,6 +9,8 @@ module ApplicationHelper
   # 渡されたユーザーでログインする
   def log_in(user)
     session[:user_id] = user.id
+    # ブラウザでログインユーザーを取得するためにクッキーにユーザー情報を入れる
+    cookies.encrypted[:user_id] = user.id
   end
 
   # 現在ログイン中のユーザーを取得

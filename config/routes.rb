@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   end
 
   # チャット
-  get '/chats', to: 'chats#show'
+  get '/rooms/:id/chats', to: 'chats#show'
 end
