@@ -1,9 +1,9 @@
 <h1>Chat Room</h1>
-<div id="messages">
+<div id="messages" data-room_id="<%= params[:id] %>">
 <% @messages.each do |message| %>
   <%= render partial: 'chats/message', locals: { message: message } %>
 <% end %>
 </div>
 
-<%= label_tag :content, 'Say something:' %>
+<%= label_tag :content, 'コメント:' %>
 <%= text_field_tag :content, nil, data: { behavior: 'room_speaker' } %>
