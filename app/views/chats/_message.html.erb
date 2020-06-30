@@ -1,2 +1,19 @@
-
-<p><%= message.user.user_name %>:<%= message.text %></p>
+<% if message.user_id == session[:user_id] %>
+  <div class="mycomment">
+    <p><%= message.text %></p>
+  </div>
+<% else %>
+  <div class="balloon6">
+    <div class="faceicon">
+      <%= image_tag message.user.image.to_s %>
+    </div>
+    <div class="chatting">
+      <div class="says">
+        <div class="small text-muted">
+          <%= message.user.user_name %>
+        </div>
+        <p><%= message.text %></p>
+      </div>
+    </div>
+  </div>
+<% end %>

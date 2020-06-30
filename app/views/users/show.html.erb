@@ -2,36 +2,24 @@
 
 <div class="container my-5">
   <div class="max-width-800 mx-auto">
-    <!-- 編集ボタン・編集ポップアップ -->
-    <div class="text-right">
-      <% if session[:user_id] == @user.id %>
-        <% if current_user.email != "guest@sysdog.com" %>
-          <button type="button" class="btn btn-outline-soc1" data-toggle="modal" data-target="#exampleModal">編集</button>
+    <%= image_tag @user.image.to_s, class: "profile-img ml-3" %>
+    <div class="p-3 profile rounded">
+      <div class="text-right">
+        <% if session[:user_id] == @user.id %>
+          <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModal">編集</button>
+        <% else %>
+          <button type="button" class="btn btn-outline-light">フォロー</button>
         <% end %>
-      <% end %>
-    </div>
-    <%= render partial: 'users/edit', locals: { user: @user } %>
-    <!-- ここまで編集 -->
-
-    <!-- ユーザー情報 -->
-    <div class="mb-5">
-      <div class="row">
-        <div class="col-3 text-center">
-          <%= image_tag @user.image.to_s %>
-        </div>
-        <div class="col-9">
-          <div class="row">
-            <div class="h3"><%= @user.user_name %></div>
-          </div>
-          <div class="row">
-            <div class="mt-3">
-              <%= @user.introduction %><br>
-            </div>
-          </div>      
-        </div>
+      </div>
+      <div class="card-title h5 text-white">
+        <%= @user.user_name %>
+      </div>
+      <div class="card-text text-white">
+        <%= @user.introduction %>
       </div>
     </div>
-    <hr>
+    <%= render partial: 'users/edit', locals: { user: @user } %>
+
     <% if !@host_now.empty? %>
       <div class="mt-5">
         <div class="h3">進行中</div>

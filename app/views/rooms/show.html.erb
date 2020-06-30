@@ -5,6 +5,9 @@
     <div class="d-flex justify-content-between">
     </div>
     <div class="row my-4 border-bottom pb-2">
+      <%= link_to :back, class: "btn btn-outline-soc1" do %>
+        <i class="fas fa-arrow-left"></i>
+      <% end %>
       <div class="h3 mx-auto"><%= @room.room_name %></div>
     </div>
     <% if @room.room_delete_flg == 1 %>
@@ -72,7 +75,7 @@
         <% end %>
       <% elsif @room.room_end_datetime > Time.zone.now %>
         <% if @room.user_id == session[:user_id] || @guests.where(user_id: session[:user_id]).present? %>
-          <%= link_to "入室する", "#", class: "btn btn-soc2 btn-lg btn-block mt-5" %>
+          <%= link_to "入室する", "/rooms/#{@room.id}/chats", class: "btn btn-soc2 btn-lg btn-block mt-5" %>
         <% else %>
           <div class="btn btn-outline-soc2 btn-lg btn-block mt-5 disabled">開催中</div>
         <% end %>

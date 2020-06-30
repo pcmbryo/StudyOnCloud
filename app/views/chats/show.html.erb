@@ -1,9 +1,31 @@
-<h1>Chat Room</h1>
-<div id="messages" data-room_id="<%= params[:id] %>">
-<% @messages.each do |message| %>
-  <%= render partial: 'chats/message', locals: { message: message } %>
-<% end %>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="bg-secondary p-2 fixed-top chat-header d-flex align-items-center">
+  <div class="chat-header-button">
+    <%= link_to "/rooms/#{@room.id}", class: "btn btn-outline-light" do %>
+      <i class="fas fa-arrow-left"></i>
+    <% end %>
+  </div>
+    <div class="pl-3 text-white chat-header-title">
+      <%= @room.room_name %>
+    </div>
 </div>
 
-<%= label_tag :content, 'コメント:' %>
-<%= text_field_tag :content, nil, data: { behavior: 'room_speaker' } %>
+<div class="chat">
+  <div class="line-bc my-0">
+    <div id="messages" data-room_id="<%= params[:id] %>">
+      <% @messages.each do |message| %>
+        <%= render partial: 'chats/message', locals: { message: message } %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="form-row no-gutters bg-secondary p-2 fixed-bottom chat-footer">
+  <div class="col">
+    <%= text_field_tag :content, nil, placeholder: "メッセージを入力", data: { behavior: 'room_speaker' }, class: "form-control" %>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-soc1 rounded-circle"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>

@@ -149,6 +149,7 @@ a {
 .date-day-month {
   width: 70px;
 }
+
 .date-day {
   height: 53px;
   background-color: #fff;
@@ -159,10 +160,12 @@ a {
   text-align: center;
   position: relative;
 }
+
 .date {
   font-size: 25px;
   padding-top: 4px;
 }
+
 .day {
   font-size: 10px;
   bottom: 0px;
@@ -171,6 +174,7 @@ a {
   width: 100%;
   margin: auto;
 }
+
 .month {
   height: 24px;
   line-height: 24px;
@@ -182,6 +186,134 @@ a {
   border-top: none;
   text-align: center;
   font-size: 15px;
+}
+
+.line-bc {
+  padding: 20px 10px;
+  margin: 15px auto;
+  text-align: right;
+  font-size: 14px;
+  background: #7da4cd;
+}
+
+.balloon6 {
+  width: 100%;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.balloon6 .faceicon {
+  float: left;
+  margin-right: -50px;
+  width: 40px;
+}
+
+.balloon6 .faceicon img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.balloon6 .chatting {
+  width: 100%;
+  text-align: left;
+}
+
+.says {
+  display: inline-block;
+  position: relative; 
+  margin: 0 0 0 50px;
+  padding: 10px;
+  max-width: 275px;
+  border-radius: 12px;
+  background: #edf1ee;
+}
+
+.says:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px; 
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #edf1ee;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+.says p {
+  margin: 0;
+  padding: 0;
+}
+
+.mycomment {
+  margin: 10px 0;
+}
+
+.mycomment p {
+  display: inline-block;
+  position: relative; 
+  margin: 0 10px 0 0;
+  padding: 8px;
+  max-width: 275px;
+  border-radius: 12px;
+  background: #30e852;
+  font-size: 15px;
+}
+
+.mycomment p:after {
+  content: "";
+  position: absolute;
+  top: 3px; 
+  right: -19px;
+  border: 8px solid transparent;
+  border-left: 18px solid #30e852;
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
+}
+
+.chat-header {
+  height: 54px;
+  overflow: hidden;
+}
+
+.chat-header-button {
+  float: left;
+  width: 40px;
+}
+
+.chat-header-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float: right;
+  width: 100%;
+  margin-right: -40px;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.chat {
+  margin-top: 54px;
+  margin-bottom: 54px;
+}
+
+.chat-footer {
+  height: 54px;
+}
+
+.profile {
+  background-color: #1ca18e;
+}
+
+.profile-img {
+  border-radius: 50%;
+  border: 1px solid;
+  border-color: #555;
+  height: 80px;
+  background-color: white;
+  position: relative;
+  top: 40px;
 }
 
 .max-width-400 {

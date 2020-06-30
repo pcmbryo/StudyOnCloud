@@ -1,20 +1,22 @@
-<nav class="header navbar navbar-expand-md navbar-light sticky-top">
-  <a class="navbar-brand" href="/">
-    <%= image_tag "soc_logo.png", alt: "logo", class: "logo" %>
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link mr-3" href="#">スタクラとは？</a>
-      <% if logged_in? %>
-        <%= link_to 'マイページ', user_path(current_user), class: "nav-item nav-link mr-3" %>
-        <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-item nav-link" %>
-      <% else %>
-        <%= link_to '新規登録', new_user_path, class: "nav-item nav-link mr-3" %>
-        <%= link_to 'ログイン', login_path, class: "nav-item nav-link" %>
-      <% end %>
+<% if !@no_header_footer %>
+  <nav class="header navbar navbar-expand-md navbar-light sticky-top">
+    <a class="navbar-brand" href="/">
+      <%= image_tag "soc_logo.png", alt: "logo", class: "logo" %>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link mr-3" href="#">スタクラとは？</a>
+        <% if logged_in? %>
+          <%= link_to 'マイページ', user_path(current_user), class: "nav-item nav-link mr-3" %>
+          <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-item nav-link" %>
+        <% else %>
+          <%= link_to '新規登録', new_user_path, class: "nav-item nav-link mr-3" %>
+          <%= link_to 'ログイン', login_path, class: "nav-item nav-link" %>
+        <% end %>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+<% end %>
