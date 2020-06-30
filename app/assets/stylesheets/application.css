@@ -224,7 +224,7 @@ a {
   position: relative; 
   margin: 0 0 0 50px;
   padding: 10px;
-  max-width: 275px;
+  max-width: 300;
   border-radius: 12px;
   background: #edf1ee;
 }
@@ -255,7 +255,7 @@ a {
   position: relative; 
   margin: 0 10px 0 0;
   padding: 8px;
-  max-width: 275px;
+  max-width: 300px;
   border-radius: 12px;
   background: #30e852;
   font-size: 15px;
